@@ -298,6 +298,11 @@ void KeplerApp::setup()
 {
 //    float t = getElapsedSeconds();
     
+    // Lock to landscape right orientation only
+    getSignalSupportedOrientations().connect( [] () -> uint32_t {
+        return InterfaceOrientation::LandscapeRight;
+    });
+    
     // iPad pro set to 120fps
     float longest = max( getWindowSize().x, getWindowSize().y );
     
@@ -1560,6 +1565,10 @@ void KeplerApp::update()
         mAlphaChooser.setNumberAlphaPerChar( mData.mNormalizedArtistsPerChar );
 		mLoadingScreen.setVisible( false ); // TODO: remove from scene graph, clean up textures
         mMainBloomNodeRef->setVisible( true );
+        
+        // Force orientation update now that UI is visible and window size is final
+        mOrientationNodeRef->setInterfaceOrientation( mOrientationHelper.getInterfaceOrientation(), false );
+        
 		mUiLayer.setIsPanelOpen( true );
 
         // and then make sure we know about the current track if there is one...

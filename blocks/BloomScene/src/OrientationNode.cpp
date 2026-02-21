@@ -42,6 +42,13 @@ OrientationNode::~OrientationNode()
     mOrientationHelper->unregisterOrientationChanged( cbOrientationChanged );
 }
 
+bool OrientationNode::addedToScene()
+{
+    // Now that we're added to the scene and mRoot is set, refresh orientation
+    setInterfaceOrientation( mOrientationHelper->getInterfaceOrientation(), false );
+    return false;
+}
+
 bool OrientationNode::orientationChanged( OrientationEvent event )
 {
     setInterfaceOrientation( event.getInterfaceOrientation(), mEnableAnimation );

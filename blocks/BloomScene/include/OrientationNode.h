@@ -40,6 +40,9 @@ public:
     
     // animate mRoot interfaceSize and this node's transform matrix
     virtual void update();
+    
+    // called when added to scene graph
+    virtual bool addedToScene();
         
 protected:
     
