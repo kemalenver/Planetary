@@ -95,6 +95,7 @@ class KeplerApp : public AppCocoaTouch {
 	virtual void	draw();
 	void			drawNoArtists();
     void            drawScene();
+    void            drawScene3D(CameraPersp* camera, bool skipUI); // Helper for 3D rendering
     void            drawScene3DOnly(CameraPersp* customCamera = NULL); // Draw just 3D content without UI
 
     // convenience methods for Flurry
@@ -2012,6 +2013,13 @@ void KeplerApp::drawNoArtists()
 
 
 void KeplerApp::drawScene()
+{
+    // Draw 3D content with UI
+    drawScene3D(&mCam, false);
+}
+
+// Helper method for 3D rendering - can skip UI for external display
+void KeplerApp::drawScene3D(CameraPersp* camera, bool skipUI)
 {	
 	vector<Node*> unsortedNodes = mWorld.getUnsortedNodes( G_ALBUM_LEVEL, G_TRACK_LEVEL );
 	Node *artistNode = mState.getSelectedArtistNode();
@@ -2021,7 +2029,7 @@ void KeplerApp::drawScene()
 	vector<Node*> sortedNodes = mWorld.sortNodes( unsortedNodes );	
 		
     gl::enableDepthWrite();
-    gl::setMatrices( mCam );
+    gl::setMatrices( *camera );
     
 // SKYDOME
     Color c = Color( CM_HSV, mPinchPer * 0.2f + 0.475f, 1.0f - mPinchPer * 0.5f, 1.0f );
@@ -2301,23 +2309,20 @@ void KeplerApp::drawScene()
 		gl::disableDepthWrite();        
     }
 	
-    // UILayer and PlayControls draw here:
-    mBloomSceneRef->deepDraw();
+    // UILayer and PlayControls draw here (unless skipUI is true):
+    if (!skipUI) {
+        mBloomSceneRef->deepDraw();
+    }
 }
 
-// Draw only 3D content (for external display) - copy of drawScene() without UI
+// Draw only 3D content (for external display) - no UI
 void KeplerApp::drawScene3DOnly(CameraPersp* customCamera)
 {
     // Use custom camera if provided, otherwise use main camera
-    CameraPersp& camera = customCamera ? *customCamera : mCam;
+    CameraPersp* camera = customCamera ? customCamera : &mCam;
     
-    // Set up the camera matrices
-    gl::setMatrices(camera);
-    
-    // This is essentially drawScene() but stops before mBloomSceneRef->deepDraw()
-    // For now, we'll just call the full drawScene() which will use the camera we just set
-    // The external display will get the 3D content + UI
-    drawScene();
+    // Draw 3D scene without UI
+    drawScene3D(camera, true);  // skipUI = true
 }
 
 bool KeplerApp::onPlayerLibraryChanged( ipod::Player *player )
