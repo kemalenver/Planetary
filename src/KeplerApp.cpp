@@ -1,6 +1,9 @@
 #include <vector>
 #include <cmath>
 
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
+
 #include "cinder/app/AppCocoaTouch.h"
 #include "cinder/app/Renderer.h"
 #include "cinder/Surface.h"
@@ -92,6 +95,7 @@ class KeplerApp : public AppCocoaTouch {
 	virtual void	draw();
 	void			drawNoArtists();
     void            drawScene();
+    void            drawScene3DOnly(CameraPersp* customCamera = NULL); // Draw just 3D content without UI
 
     // convenience methods for Flurry
     void            logEvent(const string &event);
@@ -285,6 +289,13 @@ class KeplerApp : public AppCocoaTouch {
 	float			mSelectionTime;
     bool            mRemainingSetupCalled; // setup() is short and fast, remainingSetup() is slow
     bool            mUiComplete;
+    
+// EXTERNAL DISPLAY
+    bool            mExternalDisplayConnected;
+    CameraPersp     mExternalCam; // Separate camera for external display with correct aspect ratio
+    void            onExternalDisplayChanged(bool connected);
+    static void     externalDisplayCallback(bool connected, void* userData);
+    void            updateExternalCamera(); // Update external camera with correct aspect ratio
 };
 
 void KeplerApp::prepareSettings(Settings *settings)
@@ -327,6 +338,10 @@ void KeplerApp::setup()
     mRemainingSetupCalled = false;
     mUiComplete = false;
 	mState.setup();
+    
+    // Initialize external display monitoring
+    mExternalDisplayConnected = false;
+    initExternalDisplayMonitoring(&KeplerApp::externalDisplayCallback, this);
     
 //    mState.setup();
     
@@ -1923,9 +1938,10 @@ void KeplerApp::updateCamera()
 
 void KeplerApp::draw()
 {
+    // DRAW TO MAIN DISPLAY (device screen)
 	gl::clear( Color( 0, 0, 0 ), true );
 	if( mData.getState() != Data::LoadStateComplete ){
-        // just for loading sc
+        // just for loading screen
 		mBloomSceneRef->deepDraw();
 	} else if( mData.mArtists.size() == 0 ){
 		drawNoArtists();
@@ -1934,8 +1950,38 @@ void KeplerApp::draw()
 	}
     
     const GLenum discards[]  = {GL_DEPTH_ATTACHMENT_OES};
-//    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
     glDiscardFramebufferEXT(GL_FRAMEBUFFER_OES,1,discards);
+    
+    // DRAW TO EXTERNAL DISPLAY (if connected)
+    if (mExternalDisplayConnected && hasExternalDisplay()) {
+        GLuint externalFBO = getExternalDisplayFramebuffer();
+        if (externalFBO > 0 && mData.getState() == Data::LoadStateComplete && mData.mArtists.size() > 0) {
+            // Update external camera to match current main camera position but with correct aspect ratio
+            updateExternalCamera();
+            
+            // Save main context
+            void* mainContext = getMainGLContext();
+            
+            // Switch to external display context and setup
+            beginExternalDisplayRendering();
+            
+            // Clear external display
+            gl::clear( Color( 0, 0, 0 ), true );
+            
+            // Draw 3D scene to external display with external camera
+            drawScene3DOnly(&mExternalCam);
+            
+            // Present external display
+            endExternalDisplayRendering();
+            
+            // Restore main context
+            restoreMainGLContext(mainContext);
+            
+            // Restore viewport for main display (just in case)
+            Vec2i mainSize = getWindowSize();
+            glViewport(0, 0, mainSize.x, mainSize.y);
+        }
+    }
 }
 
 void KeplerApp::drawNoArtists()
@@ -2259,6 +2305,21 @@ void KeplerApp::drawScene()
     mBloomSceneRef->deepDraw();
 }
 
+// Draw only 3D content (for external display) - copy of drawScene() without UI
+void KeplerApp::drawScene3DOnly(CameraPersp* customCamera)
+{
+    // Use custom camera if provided, otherwise use main camera
+    CameraPersp& camera = customCamera ? *customCamera : mCam;
+    
+    // Set up the camera matrices
+    gl::setMatrices(camera);
+    
+    // This is essentially drawScene() but stops before mBloomSceneRef->deepDraw()
+    // For now, we'll just call the full drawScene() which will use the camera we just set
+    // The external display will get the 3D content + UI
+    drawScene();
+}
+
 bool KeplerApp::onPlayerLibraryChanged( ipod::Player *player )
 {	
     // RESET:
@@ -2455,6 +2516,52 @@ void KeplerApp::logEvent(const string &event, const map<string,string> &params)
    
 }
 
+// External display callback - static function that forwards to instance method
+void KeplerApp::externalDisplayCallback(bool connected, void* userData)
+{
+    KeplerApp* app = static_cast<KeplerApp*>(userData);
+    if (app) {
+        app->onExternalDisplayChanged(connected);
+    }
+}
 
+// Handle external display connection/disconnection
+void KeplerApp::onExternalDisplayChanged(bool connected)
+{
+    mExternalDisplayConnected = connected;
+    
+    if (connected) {
+        float width, height;
+        getExternalDisplaySize(&width, &height);
+        std::cout << "External display connected: " << width << "x" << height << std::endl;
+        logEvent("External Display Connected");
+        updateExternalCamera();
+    } else {
+        std::cout << "External display disconnected" << std::endl;
+        logEvent("External Display Disconnected");
+    }
+}
+
+// Update external camera with correct aspect ratio for external display
+void KeplerApp::updateExternalCamera()
+{
+    if (!mExternalDisplayConnected) {
+        return;
+    }
+    
+    float extWidth, extHeight;
+    getExternalDisplaySize(&extWidth, &extHeight);
+    
+    if (extWidth > 0 && extHeight > 0) {
+        float externalAspectRatio = extWidth / extHeight;
+        
+        // Copy main camera settings but use external display's aspect ratio
+        mExternalCam = mCam;
+        mExternalCam.setPerspective(mFov, externalAspectRatio, 0.001f, 2000.0f);
+        
+        std::cout << "External camera updated - Aspect ratio: " << externalAspectRatio 
+                  << " (main: " << getWindowAspectRatio() << ")" << std::endl;
+    }
+}
 
 CINDER_APP_COCOA_TOUCH( KeplerApp, RendererGl )
