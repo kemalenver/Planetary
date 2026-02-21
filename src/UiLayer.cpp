@@ -272,13 +272,13 @@ float UiLayer::getPanelHeight()
     if (mSettingsPanel->isVisible()) {
         panelHeight += mSettingsPanel->getHeight();
     }
-    return panelHeight;
+    return panelHeight + 15;
 }
 
 float UiLayer::getMaxPanelHeight()
 {
     float panelHeight = mPlayControls->getHeight();
     panelHeight += max( mPlaylistChooser->getHeight(), mAlphaChooser->getHeight() );
-    panelHeight += mSettingsPanel->getHeight();
-    return panelHeight;
+    panelHeight += mSettingsPanel->getHeight() ;
+    return panelHeight + 15;
 }
