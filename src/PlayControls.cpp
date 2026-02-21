@@ -141,7 +141,7 @@ void PlayControls::addChildren()
     
     addChild( BloomNodeRef(mShowSettingsButton) );
 	addChild( BloomNodeRef(mAlphaButton) );
-	addChild( BloomNodeRef(mPlaylistButton) );
+//	addChild( BloomNodeRef(mPlaylistButton) );
     
     addChild( BloomNodeRef(mPreviousTrackButton) );
     addChild( BloomNodeRef(mPlayPauseButton) );
@@ -183,7 +183,7 @@ void PlayControls::setInterfaceSize( Vec2f interfaceSize )
     const bool  landscape    = interfaceSize.x > interfaceSize.y;
     const bool  isIPhone     = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
     const float baseWidth    = landscape ? 328.0f : 170.0f;
-    const float sliderWidth  = isIPhone ? baseWidth - 80.0f : baseWidth;
+    const float sliderWidth  = isIPhone ? baseWidth - 50.0f : baseWidth;
 	const float buttonGap	 = landscape ? bSize*2.0f : bSize*1.5f;
     
     // FLY TO CURRENT TRACK-MOON BUTTON
@@ -216,9 +216,9 @@ void PlayControls::setInterfaceSize( Vec2f interfaceSize )
     mShowSettingsButton->setRect( x1, y1, x2, y2 );
 
     // PLAYLIST BUTTON
-	x1 -= buttonGap;
-	x2 = x1 + bSize;
-    mPlaylistButton->setRect( x1, y1, x2, y2 );	
+//	x1 -= buttonGap;
+//	x2 = x1 + bSize;
+//    mPlaylistButton->setRect( x1, y1, x2, y2 );	
 	
 	// ALPHA BUTTON
 	x1 -= bSize;
