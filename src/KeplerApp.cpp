@@ -303,12 +303,21 @@ void KeplerApp::setup()
         return InterfaceOrientation::LandscapeRight;
     });
     
-    // iPad pro set to 120fps
-    float longest = max( getWindowSize().x, getWindowSize().y );
+    /// iPad pro set to 120fps
+    ///
     
-    if ( longest >= 1366) {
-        setFrameRate(120);
-    }
+    setFrameRate(120);
+    
+//    float longest = max( getWindowSize().x, getWindowSize().y );
+//    bool isIPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
+    
+//    if ( longest >= 1200) {
+//        setFrameRate(120);
+//        console() << "Setting frame rate to 120 fps (device: " << (isIPhone ? "iPhone" : "iPad") << ", longest dimension: " << longest << ")" << endl;
+//    } else {
+//        console() << "Using default frame rate (device: " << (isIPhone ? "iPhone" : "iPad") << ", longest dimension: " << longest << ")" << endl;
+//    }
+
     
     mRemainingSetupCalled = false;
     mUiComplete = false;
