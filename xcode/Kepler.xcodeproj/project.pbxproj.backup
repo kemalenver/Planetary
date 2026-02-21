@@ -3,13 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		00CFDF6B1138442D0091E310 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00CFDF6A1138442D0091E310 /* CoreGraphics.framework */; };
 		00CFDFE011384CC60091E310 /* KeplerApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00CFDFDF11384CC60091E310 /* KeplerApp.cpp */; };
-		0A5D453222E16DDC00917BC3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A5D453122E16DDC00917BC3 /* Launch Screen.storyboard */; platformFilter = ios; };
+		0A5D453222E16DDC00917BC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A5D453122E16DDC00917BC3 /* LaunchScreen.storyboard */; platformFilter = ios; };
 		0A5D453822E19DF600917BC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A5D453722E19DF500917BC3 /* Assets.xcassets */; };
 		0A9BFE3522C9B0EB00B770CF /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9BFE3422C9B0EA00B770CF /* ImageIO.framework */; };
 		0A9BFE3722C9B12B00B770CF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9BFE3622C9B12B00B770CF /* MobileCoreServices.framework */; };
@@ -23,6 +23,7 @@
 		C727C02E121B400300192073 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C727C02D121B400300192073 /* CoreVideo.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C7FB19D6124BC0D70045AFD2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB19D5124BC0D70045AFD2 /* AudioToolbox.framework */; };
 		C7FB19D6124BC0D70045AFD3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB19D5124BC0D70045AFD3 /* CoreText.framework */; };
+		CF13E8DD2F49723E0031B17D /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = CF13E8DC2F49723E0031B17D /* OneSignalFramework */; };
 		E10D86D41384EAD100346445 /* orbitRingGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D86D31384EAD100346445 /* orbitRingGradient.png */; };
 		E10D86D61384FF8200346445 /* origin.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D86D51384FF8200346445 /* origin.png */; };
 		E10D86DE1386077900346445 /* surfacesHighRes.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D86DD1386077800346445 /* surfacesHighRes.png */; };
@@ -120,7 +121,7 @@
 /* Begin PBXFileReference section */
 		00CFDF6A1138442D0091E310 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		00CFDFDF11384CC60091E310 /* KeplerApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KeplerApp.cpp; path = ../src/KeplerApp.cpp; sourceTree = "<group>"; };
-		0A5D453122E16DDC00917BC3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		0A5D453122E16DDC00917BC3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A5D453722E19DF500917BC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A5D453922E1A49200917BC3 /* PlanetaryDistribution.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlanetaryDistribution.entitlements; sourceTree = "<group>"; };
 		0A9BFE3422C9B0EA00B770CF /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -297,6 +298,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF13E8DD2F49723E0031B17D /* OneSignalFramework in Frameworks */,
 				0A9BFE3722C9B12B00B770CF /* MobileCoreServices.framework in Frameworks */,
 				0A9BFE3522C9B0EB00B770CF /* ImageIO.framework in Frameworks */,
 				E1AA09A7135508B900B44147 /* CoreMotion.framework in Frameworks */,
@@ -358,7 +360,7 @@
 				CFF0CB1C24A4BEF100F44147 /* Planetary.entitlements */,
 				0A5D453922E1A49200917BC3 /* PlanetaryDistribution.entitlements */,
 				0A5D453722E19DF500917BC3 /* Assets.xcassets */,
-				0A5D453122E16DDC00917BC3 /* Launch Screen.storyboard */,
+				0A5D453122E16DDC00917BC3 /* LaunchScreen.storyboard */,
 				E1A332D9130105EC00CED126 /* Blocks */,
 				00CFDFB81138492F0091E310 /* Headers */,
 				00CFDFA7113848F40091E310 /* Source */,
@@ -825,6 +827,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				CF13E8DE2F4973240031B17D /* Embed OneSig */,
 			);
 			buildRules = (
 			);
@@ -859,6 +862,9 @@
 				German,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			packageReferences = (
+				CF13E8D92F49723E0031B17D /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+			);
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -879,7 +885,7 @@
 				0A5D453822E19DF600917BC3 /* Assets.xcassets in Resources */,
 				E1A3303A1301013100CED126 /* star.png in Resources */,
 				E1555CA5131EEBEB0079B05A /* dotted.png in Resources */,
-				0A5D453222E16DDC00917BC3 /* Launch Screen.storyboard in Resources */,
+				0A5D453222E16DDC00917BC3 /* LaunchScreen.storyboard in Resources */,
 				E17667DE13202FB7006A4C2E /* rings.png in Resources */,
 				E1FC7DA313381853007F333C /* eclipseGlow.png in Resources */,
 				E189F6761339A377009B2E23 /* playheadProgress.png in Resources */,
@@ -921,6 +927,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CF13E8DE2F4973240031B17D /* Embed OneSig */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Embed OneSig";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Copy OneSignal framework from source packages to PackageFrameworks\nONESIGNAL_SOURCE=\"${BUILD_DIR}/../../SourcePackages/artifacts/onesignal-xcframework/OneSignalFramework/OneSignalFramework.xcframework\"\n\nif [ -d \"${ONESIGNAL_SOURCE}\" ]; then\n    echo \"Found OneSignal at: ${ONESIGNAL_SOURCE}\"\n    \n    # Create PackageFrameworks directory\n    mkdir -p \"${BUILT_PRODUCTS_DIR}/PackageFrameworks\"\n    \n    # Extract the correct slice from xcframework for current architecture\n    if [ \"${PLATFORM_NAME}\" == \"iphoneos\" ]; then\n        FRAMEWORK_PATH=\"${ONESIGNAL_SOURCE}/ios-arm64/OneSignalFramework.framework\"\n    else\n        FRAMEWORK_PATH=\"${ONESIGNAL_SOURCE}/ios-arm64_x86_64-simulator/OneSignalFramework.framework\"\n    fi\n    \n    echo \"Copying from: ${FRAMEWORK_PATH}\"\n    echo \"Copying to: ${BUILT_PRODUCTS_DIR}/PackageFrameworks/\"\n    \n    cp -R \"${FRAMEWORK_PATH}\" \"${BUILT_PRODUCTS_DIR}/PackageFrameworks/\"\n    \n    # Also copy to app bundle\n    mkdir -p \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}\"\n    cp -R \"${FRAMEWORK_PATH}\" \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/\"\n    \n    # Code sign\n    codesign --force --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" --preserve-metadata=identifier,entitlements --timestamp=none \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignalFramework.framework\"\n    \n    echo \"OneSignal framework copied and signed successfully\"\nelse\n    echo \"ERROR: OneSignal framework not found at ${ONESIGNAL_SOURCE}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
@@ -987,6 +1014,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CINDER_PATH = ../cinder86;
 				CODE_SIGN_ENTITLEMENTS = Planetary.entitlements;
@@ -1010,14 +1038,25 @@
 				INFOPLIST_FILE = "Kepler-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"\"@executable​_path​/​Frameworks\"",
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
+					"\"@loader​_path​/​Frameworks\"",
+				);
 				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone_d.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_system.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_filesystem.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_date_time.a\"",
 					"-lz",
 				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone-sim_d.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_system.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_filesystem.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_date_time.a\"",
 					"-lz",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kemalenver.solarplay;
@@ -1038,6 +1077,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CINDER_PATH = ../cinder86;
 				CODE_SIGN_ENTITLEMENTS = Planetary.entitlements;
@@ -1060,14 +1100,25 @@
 				INFOPLIST_FILE = "Kepler-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"\"@executable​_path​/​Frameworks\"",
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
+					"\"@loader​_path​/​Frameworks\"",
+				);
 				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_system.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_filesystem.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_date_time.a\"",
 					"-lz",
 				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone-sim.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_system.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_filesystem.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_date_time.a\"",
 					"-lz",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kemalenver.solarplay;
@@ -1087,7 +1138,9 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				CINDER_PATH = ../cinder86;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1116,7 +1169,9 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				CINDER_PATH = ../cinder86;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1145,7 +1200,9 @@
 		E2E91DD3135B78C600B062C5 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				CINDER_PATH = ../cinder86;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1176,6 +1233,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CINDER_PATH = ../cinder86;
 				CODE_SIGN_ENTITLEMENTS = PlanetaryDistribution.entitlements;
@@ -1197,14 +1255,25 @@
 				INFOPLIST_FILE = "Kepler-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"\"@executable​_path​/​Frameworks\"",
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
+					"\"@loader​_path​/​Frameworks\"",
+				);
 				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_system.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_filesystem.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_date_time.a\"",
 					"-lz",
 				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone-sim.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_system.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_filesystem.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_date_time.a\"",
 					"-lz",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kemalenver.solarplay;
@@ -1245,6 +1314,25 @@
 			defaultConfigurationName = Distribution;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CF13E8D92F49723E0031B17D /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CF13E8DC2F49723E0031B17D /* OneSignalFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF13E8D92F49723E0031B17D /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalFramework;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }

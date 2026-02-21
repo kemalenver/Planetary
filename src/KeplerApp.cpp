@@ -50,6 +50,7 @@
 #include "ParticleController.h"
 #include "TextureLoader.h"
 #include "TaskQueue.h"
+#include "OneSignalHelper.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -297,6 +298,9 @@ void KeplerApp::prepareSettings(Settings *settings)
 void KeplerApp::setup()
 {
 //    float t = getElapsedSeconds();
+    
+    // Initialize OneSignal for push notifications
+    initializeOneSignal("0f21d4cf-7dc3-446d-aa45-d4bba9a8280b");
     
     // Lock to landscape right orientation only
     getSignalSupportedOrientations().connect( [] () -> uint32_t {

@@ -23,6 +23,8 @@
 		C727C02E121B400300192073 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C727C02D121B400300192073 /* CoreVideo.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C7FB19D6124BC0D70045AFD2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB19D5124BC0D70045AFD2 /* AudioToolbox.framework */; };
 		C7FB19D6124BC0D70045AFD3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB19D5124BC0D70045AFD3 /* CoreText.framework */; };
+		CF13E8DD2F49723E0031B17D /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = CF13E8DC2F49723E0031B17D /* OneSignalFramework */; };
+		CF13E8E12F4976320031B17D /* OneSignalHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF13E8E02F4976320031B17D /* OneSignalHelper.mm */; };
 		E10D86D41384EAD100346445 /* orbitRingGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D86D31384EAD100346445 /* orbitRingGradient.png */; };
 		E10D86D61384FF8200346445 /* origin.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D86D51384FF8200346445 /* origin.png */; };
 		E10D86DE1386077900346445 /* surfacesHighRes.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D86DD1386077800346445 /* surfacesHighRes.png */; };
@@ -120,7 +122,7 @@
 /* Begin PBXFileReference section */
 		00CFDF6A1138442D0091E310 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		00CFDFDF11384CC60091E310 /* KeplerApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KeplerApp.cpp; path = ../src/KeplerApp.cpp; sourceTree = "<group>"; };
-		0A5D453122E16DDC00917BC3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		0A5D453122E16DDC00917BC3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A5D453722E19DF500917BC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A5D453922E1A49200917BC3 /* PlanetaryDistribution.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlanetaryDistribution.entitlements; sourceTree = "<group>"; };
 		0A9BFE3422C9B0EA00B770CF /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -138,6 +140,8 @@
 		C727C02D121B400300192073 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		C7FB19D5124BC0D70045AFD2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C7FB19D5124BC0D70045AFD3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		CF13E8E02F4976320031B17D /* OneSignalHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = OneSignalHelper.mm; path = Kepler/Source/Helpers/OneSignalHelper.mm; sourceTree = "<group>"; };
+		CF13E8E22F4976700031B17D /* OneSignalHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OneSignalHelper.h; path = Kepler/Headers/Helpers/OneSignalHelper.h; sourceTree = "<group>"; };
 		CFF0CB1C24A4BEF100F44147 /* Planetary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planetary.entitlements; sourceTree = "<group>"; };
 		E10D86D31384EAD100346445 /* orbitRingGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orbitRingGradient.png; path = ../resources/ui/orbitRingGradient.png; sourceTree = "<group>"; };
 		E10D86D51384FF8200346445 /* origin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = origin.png; path = ../resources/ui/origin.png; sourceTree = "<group>"; };
@@ -297,6 +301,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF13E8DD2F49723E0031B17D /* OneSignalFramework in Frameworks */,
 				0A9BFE3722C9B12B00B770CF /* MobileCoreServices.framework in Frameworks */,
 				0A9BFE3522C9B0EB00B770CF /* ImageIO.framework in Frameworks */,
 				E1AA09A7135508B900B44147 /* CoreMotion.framework in Frameworks */,
@@ -500,6 +505,7 @@
 		E177A6CB134E7B640014AD55 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				CF13E8E02F4976320031B17D /* OneSignalHelper.mm */,
 				E177A6CC134E7B850014AD55 /* BloomGl.cpp */,
 				E219CEE513A5A615006C7F26 /* BloomSphere.cpp */,
 				E27A27E413DDDF8500B957EC /* TextureLoader.cpp */,
@@ -523,6 +529,7 @@
 		E1C6017E13188B280022246C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				CF13E8E22F4976700031B17D /* OneSignalHelper.h */,
 				E219CEE613A5A615006C7F26 /* BloomSphere.h */,
 				E2E21CDA13A1870E00A476A2 /* Device.h */,
 				E2E21CB713A177E200A476A2 /* BloomGl.h */,
@@ -825,6 +832,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				CF13E8DE2F4973240031B17D /* Embed OneSig */,
 			);
 			buildRules = (
 			);
@@ -859,6 +867,9 @@
 				German,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			packageReferences = (
+				CF13E8D92F49723E0031B17D /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+			);
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -922,6 +933,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CF13E8DE2F4973240031B17D /* Embed OneSig */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Embed OneSig";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Copy OneSignal framework from source packages to PackageFrameworks\nONESIGNAL_SOURCE=\"${BUILD_DIR}/../../SourcePackages/artifacts/onesignal-xcframework/OneSignalFramework/OneSignalFramework.xcframework\"\n\nif [ -d \"${ONESIGNAL_SOURCE}\" ]; then\n    echo \"Found OneSignal at: ${ONESIGNAL_SOURCE}\"\n    \n    # Create PackageFrameworks directory\n    mkdir -p \"${BUILT_PRODUCTS_DIR}/PackageFrameworks\"\n    \n    # Extract the correct slice from xcframework for current architecture\n    if [ \"${PLATFORM_NAME}\" == \"iphoneos\" ]; then\n        FRAMEWORK_PATH=\"${ONESIGNAL_SOURCE}/ios-arm64/OneSignalFramework.framework\"\n    else\n        FRAMEWORK_PATH=\"${ONESIGNAL_SOURCE}/ios-arm64_x86_64-simulator/OneSignalFramework.framework\"\n    fi\n    \n    echo \"Copying from: ${FRAMEWORK_PATH}\"\n    echo \"Copying to: ${BUILT_PRODUCTS_DIR}/PackageFrameworks/\"\n    \n    cp -R \"${FRAMEWORK_PATH}\" \"${BUILT_PRODUCTS_DIR}/PackageFrameworks/\"\n    \n    # Also copy to app bundle\n    mkdir -p \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}\"\n    cp -R \"${FRAMEWORK_PATH}\" \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/\"\n    \n    # Code sign\n    codesign --force --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" --preserve-metadata=identifier,entitlements --timestamp=none \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignalFramework.framework\"\n    \n    echo \"OneSignal framework copied and signed successfully\"\nelse\n    echo \"ERROR: OneSignal framework not found at ${ONESIGNAL_SOURCE}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -943,6 +975,7 @@
 				E167C8D5132EAFBE00CB496E /* Particle.cpp in Sources */,
 				E167C8D6132EAFBE00CB496E /* ParticleController.cpp in Sources */,
 				E22998CC1332D62E0043CDCA /* LoadingScreen.cpp in Sources */,
+				CF13E8E12F4976320031B17D /* OneSignalHelper.mm in Sources */,
 				E1FC7DA11337E4D9007F333C /* Dust.cpp in Sources */,
 				E28FDA831339B782005EDBB4 /* PlayControls.cpp in Sources */,
 				E177A6CE134E7B850014AD55 /* BloomGl.cpp in Sources */,
@@ -1011,6 +1044,10 @@
 				INFOPLIST_FILE = "Kepler-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
@@ -1037,7 +1074,6 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				TARGETED_DEVICE_FAMILY = "1,2,3,6";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
-				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Debug;
 		};
@@ -1069,6 +1105,10 @@
 				INFOPLIST_FILE = "Kepler-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
@@ -1096,13 +1136,13 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				TARGETED_DEVICE_FAMILY = "1,2,3,6";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
-				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				CINDER_PATH = ../cinder86;
@@ -1127,13 +1167,13 @@
 					include,
 				);
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
-				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				CINDER_PATH = ../cinder86;
@@ -1158,13 +1198,13 @@
 					include,
 				);
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
-				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Release;
 		};
 		E2E91DD3135B78C600B062C5 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				CINDER_PATH = ../cinder86;
@@ -1189,7 +1229,6 @@
 					include,
 				);
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
-				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Distribution;
 		};
@@ -1220,6 +1259,10 @@
 				INFOPLIST_FILE = "Kepler-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
@@ -1247,7 +1290,6 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				TARGETED_DEVICE_FAMILY = "1,2,3,6";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
-				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Distribution;
 		};
@@ -1275,6 +1317,25 @@
 			defaultConfigurationName = Distribution;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CF13E8D92F49723E0031B17D /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CF13E8DC2F49723E0031B17D /* OneSignalFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF13E8D92F49723E0031B17D /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalFramework;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }
