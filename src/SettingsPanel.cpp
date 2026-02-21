@@ -72,6 +72,12 @@ void SettingsPanel::createChildren( const Font &font, const gl::Texture &uiSmall
 											Area( x0, y3, x1, y4 ),  // on texture
 											Area( x0, y2, x1, y3 ) ); // off texture
 	
+	mAirPlayButton = new ToggleButton(		AIRPLAY,
+											false,
+											uiSmallButtonsTex,
+											Area( x0, y3, x1, y4 ),  // on texture (reuse debug icon)
+											Area( x0, y2, x1, y3 ) ); // off texture
+	
     mScreensaverButton = new ToggleButton(	AUTO_MOVE,
 											false,
 											uiSmallButtonsTex,
@@ -139,6 +145,7 @@ void SettingsPanel::addChildren()
     addChild( BloomNodeRef(mOrbitsButton) );
     addChild( BloomNodeRef(mLabelsButton) );
 //    addChild( BloomNodeRef(mDebugButton) );
+	addChild( BloomNodeRef(mAirPlayButton) );
 	addChild( BloomNodeRef(mParamSlider1) );
 	addChild( BloomNodeRef(mParamSlider2) );
 	addChild( BloomNodeRef(mParamSlider1Label) );
@@ -176,6 +183,11 @@ void SettingsPanel::setInterfaceSize( const Vec2f &interfaceSize )
 	x1 -= bSizeSmall;
 	x2 = x1 + bSizeSmall;
     mOrbitsButton->setRect( x1, y1, x2, y2 );
+
+    // AIRPLAY TOGGLE BUTTON
+	x1 -= bSizeSmall;
+	x2 = x1 + bSizeSmall;
+    mAirPlayButton->setRect( x1, y1, x2, y2 );
 
     // DEBUG TOGGLE BUTTON
 //	x1 -= bSizeSmall;

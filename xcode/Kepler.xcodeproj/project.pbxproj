@@ -25,6 +25,8 @@
 		C7FB19D6124BC0D70045AFD3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FB19D5124BC0D70045AFD3 /* CoreText.framework */; };
 		CF13E8DD2F49723E0031B17D /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = CF13E8DC2F49723E0031B17D /* OneSignalFramework */; };
 		CF13E8E12F4976320031B17D /* OneSignalHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF13E8E02F4976320031B17D /* OneSignalHelper.mm */; };
+		CF13E8E52F49A3450031B17D /* ExternalDisplayHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF13E8E42F49A3450031B17D /* ExternalDisplayHelper.mm */; };
+		CF13E8E72F49A59D0031B17D /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF13E8E62F49A59D0031B17D /* AVKit.framework */; };
 		E10D86D41384EAD100346445 /* orbitRingGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D86D31384EAD100346445 /* orbitRingGradient.png */; };
 		E10D86D61384FF8200346445 /* origin.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D86D51384FF8200346445 /* origin.png */; };
 		E10D86DE1386077900346445 /* surfacesHighRes.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D86DD1386077800346445 /* surfacesHighRes.png */; };
@@ -142,6 +144,9 @@
 		C7FB19D5124BC0D70045AFD3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		CF13E8E02F4976320031B17D /* OneSignalHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = OneSignalHelper.mm; path = Kepler/Source/Helpers/OneSignalHelper.mm; sourceTree = "<group>"; };
 		CF13E8E22F4976700031B17D /* OneSignalHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OneSignalHelper.h; path = Kepler/Headers/Helpers/OneSignalHelper.h; sourceTree = "<group>"; };
+		CF13E8E32F49A33D0031B17D /* ExternalDisplayHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExternalDisplayHelper.h; sourceTree = "<group>"; };
+		CF13E8E42F49A3450031B17D /* ExternalDisplayHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ExternalDisplayHelper.mm; sourceTree = "<group>"; };
+		CF13E8E62F49A59D0031B17D /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS26.4.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		CFF0CB1C24A4BEF100F44147 /* Planetary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planetary.entitlements; sourceTree = "<group>"; };
 		E10D86D31384EAD100346445 /* orbitRingGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orbitRingGradient.png; path = ../resources/ui/orbitRingGradient.png; sourceTree = "<group>"; };
 		E10D86D51384FF8200346445 /* origin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = origin.png; path = ../resources/ui/origin.png; sourceTree = "<group>"; };
@@ -301,6 +306,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF13E8E72F49A59D0031B17D /* AVKit.framework in Frameworks */,
 				CF13E8DD2F49723E0031B17D /* OneSignalFramework in Frameworks */,
 				0A9BFE3722C9B12B00B770CF /* MobileCoreServices.framework in Frameworks */,
 				0A9BFE3522C9B0EB00B770CF /* ImageIO.framework in Frameworks */,
@@ -396,6 +402,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CF13E8E62F49A59D0031B17D /* AVKit.framework */,
 				0A9BFE3622C9B12B00B770CF /* MobileCoreServices.framework */,
 				0A9BFE3422C9B0EA00B770CF /* ImageIO.framework */,
 				E1AA09A6135508B900B44147 /* CoreMotion.framework */,
@@ -510,6 +517,7 @@
 				E219CEE513A5A615006C7F26 /* BloomSphere.cpp */,
 				E27A27E413DDDF8500B957EC /* TextureLoader.cpp */,
 				E2540830140EBCBA00EA3154 /* StringHelpers.mm */,
+				CF13E8E42F49A3450031B17D /* ExternalDisplayHelper.mm */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -536,6 +544,7 @@
 				E2E21CBE13A177E500A476A2 /* Globals.h */,
 				E27A27E513DDDF8500B957EC /* TextureLoader.h */,
 				E254082D140EB55200EA3154 /* StringHelpers.h */,
+				CF13E8E32F49A33D0031B17D /* ExternalDisplayHelper.h */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -997,6 +1006,7 @@
 				E219CEF513A6F645006C7F26 /* Stars.cpp in Sources */,
 				E219CEF813A6F79D006C7F26 /* OrbitRing.cpp in Sources */,
 				E219CEFB13A7D7CE006C7F26 /* PlanetRing.cpp in Sources */,
+				CF13E8E52F49A3450031B17D /* ExternalDisplayHelper.mm in Sources */,
 				E219CEFE13A7DAFD006C7F26 /* Constellation.cpp in Sources */,
 				E22D983B13B6A2B700F9DB06 /* Shadow.cpp in Sources */,
 				E2CD4B9D13CA6F350047AF5F /* PlaylistChooser.cpp in Sources */,

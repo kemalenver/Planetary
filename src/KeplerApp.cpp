@@ -51,6 +51,7 @@
 #include "TextureLoader.h"
 #include "TaskQueue.h"
 #include "OneSignalHelper.h"
+#include "ExternalDisplayHelper.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -1204,6 +1205,15 @@ bool KeplerApp::onSettingsPanelButtonPressed( BloomSceneEventRef event )
 			else			mNotificationOverlay.show( mTextures[UI_BUTTONS_TEX], Area( uw*2, uh*2, uw*3, uh*3 ), offArea, "DEBUG MODE" );
             mSettingsPanel.setDebugOn( G_DEBUG );
             break;
+			
+		case SettingsPanel::AIRPLAY:
+		{
+			std::cout << "AirPlay button pressed!" << std::endl;
+			logEvent("AirPlay Button Selected");
+			UIView* nativeView = (__bridge UIView*)getWindow()->getNative();
+			showAirPlayPicker((__bridge void*)nativeView, 100, 100, 50, 50);
+		}
+		break;
 			
 		case SettingsPanel::AUTO_MOVE:
 			if( G_SHOW_SETTINGS ){
