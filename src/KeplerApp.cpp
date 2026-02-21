@@ -58,12 +58,12 @@ using namespace bloom;
 
 float G_ZOOM			= 0;
 int G_CURRENT_LEVEL		= 0;
-bool G_DEBUG			= true;
+bool G_DEBUG			= false;
 bool G_AUTO_MOVE		= false;
 bool G_SHOW_SETTINGS	= false;
 bool G_DRAW_RINGS		= true;
 bool G_DRAW_TEXT		= true;
-int G_NUM_PARTICLES		= 25;
+int G_NUM_PARTICLES		= 256;
 int G_NUM_DUSTS			= 250;
 
 class KeplerApp : public AppCocoaTouch {
@@ -297,17 +297,22 @@ void KeplerApp::setup()
 {
 //    float t = getElapsedSeconds();
     
-	
+    // iPad pro set to 120fps
+    float longest = max( getWindowSize().x, getWindowSize().y );
+    
+    if ( longest >= 1366) {
+        setFrameRate(120);
+    }
     
     mRemainingSetupCalled = false;
     mUiComplete = false;
 	mState.setup();
     
-    mState.setup();
+//    mState.setup();
     
     //    console() << "G_IS_IPAD2: " << G_IS_IPAD2 << endl;
     
-    G_NUM_PARTICLES = 80;
+    G_NUM_PARTICLES = 160;
     G_NUM_DUSTS = 5000;
     
     mOrientationHelper.registerOrientationChanged( this, &KeplerApp::orientationChanged );    
@@ -1156,6 +1161,25 @@ bool KeplerApp::onSettingsPanelButtonPressed( BloomSceneEventRef event )
             break;
             
 		case SettingsPanel::DEBUG_FEATURE:
+            
+            
+//            [[NSNotificationCenter defaultCenter] addObserver: *this
+//                                                     selector:@selector(screenDidConnect:)
+//                                                         name:UIScreenDidConnectNotification
+//                                                       object:nil];
+            
+            std::cout << "has external window: " << UIApplication.sharedApplication.windows.count << std::endl;
+            
+            
+            UIApplication.sharedApplication.windows.lastObject.screen = UIScreen.mainScreen;
+            UIApplication.sharedApplication.windows.lastObject.makeKeyAndVisible;
+//            if (UIScreen.screens.count > 1) {
+//
+//
+//            } else {
+//                std::cout << "Just iPad screen: " << UIScreen.screens[1].bounds.size.width << std::endl;
+//            }
+            
 			G_DEBUG = !G_DEBUG;
 			if( G_DEBUG )	mNotificationOverlay.show( mTextures[UI_BUTTONS_TEX], Area( uw*2, uh*2, uw*3, uh*3 ), "DEBUG MODE" );
 			else			mNotificationOverlay.show( mTextures[UI_BUTTONS_TEX], Area( uw*2, uh*2, uw*3, uh*3 ), offArea, "DEBUG MODE" );

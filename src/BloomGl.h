@@ -22,7 +22,7 @@ namespace bloom { namespace gl {
 	void drawSphericalBillboard( const ci::Vec3f &camEye, const ci::Vec3f &objPos, const ci::Vec2f &scale, float rotationDegrees );
     void drawSphericalRotatedBillboard( const ci::Vec3f &pos, const ci::Vec3f &lookAt, const ci::Vec3f &turnAt, const ci::Vec2f &scale );
 	
-    // hat tip http://craiggiles.wordpress.com/2009/08/03/opengl-es-batch-rendering-on-the-iphone/
+    // hat tip ΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩΩ
 
     struct VertexData {
         ci::Vec2f vertex;

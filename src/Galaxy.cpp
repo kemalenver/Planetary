@@ -131,8 +131,10 @@ void Galaxy::drawSpiralPlanes()
 
 void Galaxy::drawCenter()
 {
+
     // CENTER OF GALAXY
-	const float alpha = mInvAlpha * mZoomOff;//( 1.25f - mCamGalaxyAlpha ) * mZoomOff;
+    const float alpha = mInvAlpha * mZoomOff;
+//    const float alpha = ( 1.25f - mCamGalaxyAlpha ) * mZoomOff;
 	
 	if( alpha > 0.01f ){
 		mStarGlowTex.enableAndBind();

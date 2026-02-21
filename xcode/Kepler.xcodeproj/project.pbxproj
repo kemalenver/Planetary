@@ -3,13 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		00CFDF6B1138442D0091E310 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00CFDF6A1138442D0091E310 /* CoreGraphics.framework */; };
 		00CFDFE011384CC60091E310 /* KeplerApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00CFDFDF11384CC60091E310 /* KeplerApp.cpp */; };
-		0A5D453222E16DDC00917BC3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A5D453122E16DDC00917BC3 /* Launch Screen.storyboard */; };
+		0A5D453222E16DDC00917BC3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A5D453122E16DDC00917BC3 /* Launch Screen.storyboard */; platformFilter = ios; };
 		0A5D453822E19DF600917BC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A5D453722E19DF500917BC3 /* Assets.xcassets */; };
 		0A9BFE3522C9B0EB00B770CF /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9BFE3422C9B0EA00B770CF /* ImageIO.framework */; };
 		0A9BFE3722C9B12B00B770CF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9BFE3622C9B12B00B770CF /* MobileCoreServices.framework */; };
@@ -844,7 +844,6 @@
 				LastUpgradeCheck = 0420;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = PDT9S226TJ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -988,6 +987,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CINDER_PATH = ../cinder86;
 				CODE_SIGN_ENTITLEMENTS = Planetary.entitlements;
@@ -995,7 +995,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PDT9S226TJ;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1010,14 +1010,21 @@
 				GENERATE_PROFILING_CODE = YES;
 				INFOPLIST_FILE = "Kepler-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone_d.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_system.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_filesystem.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_date_time.a\"",
 					"-lz",
 				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone-sim_d.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_system.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_filesystem.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_date_time.a\"",
 					"-lz",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kemalenver.solarplay;
@@ -1025,9 +1032,12 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,3,6";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Debug;
 		};
@@ -1036,6 +1046,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CINDER_PATH = ../cinder86;
 				CODE_SIGN_ENTITLEMENTS = Planetary.entitlements;
@@ -1043,7 +1054,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PDT9S226TJ;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -1057,14 +1068,21 @@
 				GENERATE_PROFILING_CODE = NO;
 				INFOPLIST_FILE = "Kepler-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_system.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_filesystem.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_date_time.a\"",
 					"-lz",
 				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone-sim.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_system.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_filesystem.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_date_time.a\"",
 					"-lz",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kemalenver.solarplay;
@@ -1073,9 +1091,12 @@
 				"PROVISIONING_PROFILE[sdk=*]" = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,3,6";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Release;
 		};
@@ -1083,6 +1104,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				CINDER_PATH = ../cinder86;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1105,6 +1127,7 @@
 					include,
 				);
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Debug;
 		};
@@ -1112,6 +1135,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				CINDER_PATH = ../cinder86;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1134,6 +1158,7 @@
 					include,
 				);
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Release;
 		};
@@ -1141,6 +1166,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				CINDER_PATH = ../cinder86;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1163,6 +1189,7 @@
 					include,
 				);
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Distribution;
 		};
@@ -1171,6 +1198,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CINDER_PATH = ../cinder86;
 				CODE_SIGN_ENTITLEMENTS = PlanetaryDistribution.entitlements;
@@ -1178,7 +1206,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PDT9S226TJ;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -1191,14 +1219,21 @@
 				GENERATE_PROFILING_CODE = NO;
 				INFOPLIST_FILE = "Kepler-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_system.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_filesystem.a\"",
+					"\"$(CINDER_PATH)/lib/ios/libboost_date_time.a\"",
 					"-lz",
 				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone-sim.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_system.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_filesystem.a\"",
+					"\"$(CINDER_PATH)/lib/ios-sim/libboost_date_time.a\"",
 					"-lz",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kemalenver.solarplay;
@@ -1207,9 +1242,12 @@
 				"PROVISIONING_PROFILE[sdk=*]" = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,3,6";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Distribution;
 		};

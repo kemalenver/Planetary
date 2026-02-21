@@ -138,7 +138,7 @@ void SettingsPanel::addChildren()
     addChild( BloomNodeRef(mHelpButton) );
     addChild( BloomNodeRef(mOrbitsButton) );
     addChild( BloomNodeRef(mLabelsButton) );
-//    addChild( BloomNodeRef(mDebugButton) );
+    addChild( BloomNodeRef(mDebugButton) );
 	addChild( BloomNodeRef(mParamSlider1) );
 	addChild( BloomNodeRef(mParamSlider2) );
 	addChild( BloomNodeRef(mParamSlider1Label) );
@@ -178,9 +178,9 @@ void SettingsPanel::setInterfaceSize( const Vec2f &interfaceSize )
     mOrbitsButton->setRect( x1, y1, x2, y2 );
 
     // DEBUG TOGGLE BUTTON
-//	x1 -= bSizeSmall;
-//	x2 = x1 + bSizeSmall;
-//    mDebugButton->setRect( x1, y1, x2, y2 );
+	x1 -= bSizeSmall;
+	x2 = x1 + bSizeSmall;
+    mDebugButton->setRect( x1, y1, x2, y2 );
 	
     // SCREENSAVER TOGGLE BUTTON
 	x1 -= bSizeSmall;

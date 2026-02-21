@@ -52,11 +52,9 @@ void Vignette::update()
         Matrix44f mat;
         mat.translate( Vec3f(mInterfaceCenter, 0) );
         
-        if ( mInterfaceSize.x > mInterfaceSize.y ) {
-            // adjust for control panel in landscape
-            float amount = (mInterfaceSize.x - mInterfaceSize.y) / (1024-768);            
-            mat.translate( Vec3f(0, -15.0f * amount, 0) );
-        }
+        // adjust for control panel in landscape
+        float amount = (mInterfaceSize.x - mInterfaceSize.y) / (1024-768);
+        mat.translate( Vec3f(0, -15.0f * amount, 0) );
 
         mat.scale( Vec3f( mScale, mScale, 1.0f ) );
         setTransform(mat);        
@@ -69,7 +67,8 @@ void Vignette::updateVerts()
 
 	mVerts = new VertexData[mTotalVertices];
 	
-	float W	= 1280; // sqrt(1024 * 1024 + 768 * 768) (diagonal)
+    float W = sqrt( ( getWindowWidth() * getWindowWidth() ) + ( getWindowHeight() * getWindowHeight() ) );
+//	float W	= 1280; // sqrt(1024 * 1024 + 768 * 768) (diagonal)
 	float H = W;    // squared off for orientation animation
 	float CW = W/2;
 	float CH = H/2;
