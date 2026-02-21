@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		00CFDF6B1138442D0091E310 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00CFDF6A1138442D0091E310 /* CoreGraphics.framework */; };
 		00CFDFE011384CC60091E310 /* KeplerApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00CFDFDF11384CC60091E310 /* KeplerApp.cpp */; };
-		0A5D453222E16DDC00917BC3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A5D453122E16DDC00917BC3 /* Launch Screen.storyboard */; platformFilter = ios; };
+		0A5D453222E16DDC00917BC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A5D453122E16DDC00917BC3 /* LaunchScreen.storyboard */; platformFilter = ios; };
 		0A5D453822E19DF600917BC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A5D453722E19DF500917BC3 /* Assets.xcassets */; };
 		0A9BFE3522C9B0EB00B770CF /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9BFE3422C9B0EA00B770CF /* ImageIO.framework */; };
 		0A9BFE3722C9B12B00B770CF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9BFE3622C9B12B00B770CF /* MobileCoreServices.framework */; };
@@ -120,7 +120,7 @@
 /* Begin PBXFileReference section */
 		00CFDF6A1138442D0091E310 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		00CFDFDF11384CC60091E310 /* KeplerApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KeplerApp.cpp; path = ../src/KeplerApp.cpp; sourceTree = "<group>"; };
-		0A5D453122E16DDC00917BC3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		0A5D453122E16DDC00917BC3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		0A5D453722E19DF500917BC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A5D453922E1A49200917BC3 /* PlanetaryDistribution.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlanetaryDistribution.entitlements; sourceTree = "<group>"; };
 		0A9BFE3422C9B0EA00B770CF /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -358,7 +358,7 @@
 				CFF0CB1C24A4BEF100F44147 /* Planetary.entitlements */,
 				0A5D453922E1A49200917BC3 /* PlanetaryDistribution.entitlements */,
 				0A5D453722E19DF500917BC3 /* Assets.xcassets */,
-				0A5D453122E16DDC00917BC3 /* Launch Screen.storyboard */,
+				0A5D453122E16DDC00917BC3 /* LaunchScreen.storyboard */,
 				E1A332D9130105EC00CED126 /* Blocks */,
 				00CFDFB81138492F0091E310 /* Headers */,
 				00CFDFA7113848F40091E310 /* Source */,
@@ -879,7 +879,7 @@
 				0A5D453822E19DF600917BC3 /* Assets.xcassets in Resources */,
 				E1A3303A1301013100CED126 /* star.png in Resources */,
 				E1555CA5131EEBEB0079B05A /* dotted.png in Resources */,
-				0A5D453222E16DDC00917BC3 /* Launch Screen.storyboard in Resources */,
+				0A5D453222E16DDC00917BC3 /* LaunchScreen.storyboard in Resources */,
 				E17667DE13202FB7006A4C2E /* rings.png in Resources */,
 				E1FC7DA313381853007F333C /* eclipseGlow.png in Resources */,
 				E189F6761339A377009B2E23 /* playheadProgress.png in Resources */,

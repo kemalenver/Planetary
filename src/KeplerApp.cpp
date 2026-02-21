@@ -287,8 +287,9 @@ class KeplerApp : public AppCocoaTouch {
 
 void KeplerApp::prepareSettings(Settings *settings)
 {
+    // Enable high-resolution display (Retina)
+    settings->enableHighDensityDisplay();
 
-    
     // start requesting events ASAP
     mOrientationHelper.setup();
 }

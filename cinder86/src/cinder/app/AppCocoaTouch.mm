@@ -1076,8 +1076,8 @@ float getOrientationDegrees( InterfaceOrientation orientation )
 {	
 	[mAppImpl setActiveWindow:self];
 
-	mSize.x = [mCinderView.layer bounds].size.width; // * mCinderView.contentScaleFactor;
-	mSize.y = [mCinderView.layer bounds].size.height; // * mCinderView.contentScaleFactor;
+	mSize.x = [mCinderView.layer bounds].size.width * mCinderView.contentScaleFactor;
+	mSize.y = [mCinderView.layer bounds].size.height * mCinderView.contentScaleFactor;
 
 	if( mAppImpl->mSetupHasFired ) {
 		mWindowRef->emitResize();

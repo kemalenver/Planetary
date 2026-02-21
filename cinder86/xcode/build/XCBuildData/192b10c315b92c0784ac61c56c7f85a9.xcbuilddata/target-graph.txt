@@ -1,0 +1,2 @@
+Target dependency graph (1 target)
+Target 'cinder_iphone' in project 'cinder' (no dependencies)
