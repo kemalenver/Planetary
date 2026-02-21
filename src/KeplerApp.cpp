@@ -1222,14 +1222,7 @@ bool KeplerApp::onSettingsPanelButtonPressed( BloomSceneEventRef event )
             mSettingsPanel.setDebugOn( G_DEBUG );
             break;
 			
-		case SettingsPanel::AIRPLAY:
-		{
-			std::cout << "AirPlay button pressed!" << std::endl;
-			logEvent("AirPlay Button Selected");
-			UIView* nativeView = (__bridge UIView*)getWindow()->getNative();
-			showAirPlayPicker((__bridge void*)nativeView, 100, 100, 50, 50);
-		}
-		break;
+
 			
 		case SettingsPanel::AUTO_MOVE:
 			if( G_SHOW_SETTINGS ){
@@ -1335,6 +1328,15 @@ bool KeplerApp::onPlayControlsButtonPressed( BloomSceneEventRef event )
             mSettingsPanel.setVisible( G_SHOW_SETTINGS ); // FIXME: animate
             mUiLayer.setShowSettings( G_SHOW_SETTINGS );
             break;
+
+        case PlayControls::AIRPLAY_CONTROL:
+        {
+            std::cout << "AirPlay button pressed from PlayControls!" << std::endl;
+            logEvent("AirPlay Button Selected");
+            UIView* nativeView = (__bridge UIView*)getWindow()->getNative();
+            showAirPlayPicker((__bridge void*)nativeView, 100, 100, 50, 50);
+        }
+        break;
 
         case PlayControls::SLIDER:
             // TODO: Flurry log?
@@ -2535,15 +2537,28 @@ void KeplerApp::onExternalDisplayChanged(bool connected)
 {
     mExternalDisplayConnected = connected;
     
+    // Update AirPlay button icon (only if UI is initialized)
+    if (mUiComplete) {
+        mPlayControls.setAirPlayOn(connected);
+    }
+    
     if (connected) {
         float width, height;
         getExternalDisplaySize(&width, &height);
         std::cout << "External display connected: " << width << "x" << height << std::endl;
         logEvent("External Display Connected");
         updateExternalCamera();
+        
+        // Reduce main display frame rate to save power when external display is active
+        setFrameRate(30);
+        std::cout << "Reduced main display frame rate to 30 fps" << std::endl;
     } else {
         std::cout << "External display disconnected" << std::endl;
         logEvent("External Display Disconnected");
+        
+        // Restore original frame rate
+        setFrameRate(120);
+        std::cout << "Restored main display frame rate to 120 fps" << std::endl;
     }
 }
 

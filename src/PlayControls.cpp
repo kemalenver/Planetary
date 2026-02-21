@@ -56,6 +56,12 @@ void PlayControls::createChildren( const Font &font, const Font &fontSmall, cons
                                             Area( uw*2, y1, uw*3, y2 ),  // on texture
                                             Area( uw*2, y0, uw*3, y1 ) );// off texture   
 
+	mAirPlayButton = new ToggleButton( AIRPLAY_CONTROL, 
+                                            false, 
+                                            uiButtonsTex,
+                                            Area( uw*4, y2, uw*5, y3 ),  // on texture (connected - col 5, row 3)
+                                            Area( uw*3, y2, uw*4, y3 ) );// off texture (disconnected - col 4, row 3)
+
     mPreviousTrackButton = new SimpleButton( PREV_TRACK, 
                                              uiButtonsTex,
                                              Area( uw*3, y1, uw*4, y2 ),  // on texture
@@ -140,6 +146,7 @@ void PlayControls::addChildren()
 	addChild( BloomNodeRef(mCurrentTrackButton) );
     
     addChild( BloomNodeRef(mShowSettingsButton) );
+	addChild( BloomNodeRef(mAirPlayButton) );
 	addChild( BloomNodeRef(mAlphaButton) );
 //	addChild( BloomNodeRef(mPlaylistButton) );
     
@@ -214,6 +221,11 @@ void PlayControls::setInterfaceSize( Vec2f interfaceSize )
 	x1 -= buttonGap;
 	x2 = x1 + bSize;    
     mShowSettingsButton->setRect( x1, y1, x2, y2 );
+
+    // AIRPLAY BUTTON (right next to settings)
+	x1 -= bSize;
+	x2 = x1 + bSize;
+    mAirPlayButton->setRect( x1, y1, x2, y2 );
 
     // PLAYLIST BUTTON
 //	x1 -= buttonGap;

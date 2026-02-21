@@ -34,7 +34,7 @@ public:
 
 	enum ButtonId { NO_BUTTON = 1000, 
                     SHOW_PLAYLIST_FILTER, SHOW_ALPHA_FILTER,
-                    GOTO_GALAXY, GOTO_CURRENT_TRACK, SETTINGS, 
+                    GOTO_GALAXY, GOTO_CURRENT_TRACK, SETTINGS, AIRPLAY_CONTROL,
                     PREV_TRACK, PLAY_PAUSE, NEXT_TRACK, 
                     SLIDER,
                     LAST_BUTTON };
@@ -66,6 +66,7 @@ public:
 	void setPlayingOn(bool on) { mPlayPauseButton->setOn(on); }
     void setAlphaOn(bool on) { mAlphaButton->setOn(on); };
     void setPlaylistOn(bool on) { mPlaylistButton->setOn(on); };
+    void setAirPlayOn(bool on) { mAirPlayButton->setOn(on); };
 
     void setElapsedSeconds(int elapsedTime) { mElapsedTimeLabel->setSeconds(elapsedTime); }
     void setRemainingSeconds(int remainingTime) { mRemainingTimeLabel->setSeconds(remainingTime); }
@@ -131,6 +132,7 @@ private:
         
     // settings
     ToggleButton *mShowSettingsButton;
+    ToggleButton *mAirPlayButton;
     
     // track skip and play/pause controls
     SimpleButton *mPreviousTrackButton;

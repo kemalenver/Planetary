@@ -31,7 +31,6 @@ public:
 	enum ButtonId { NO_BUTTON = 2000, 
                     SHUFFLE, REPEAT, 
                     HELP, AUTO_MOVE, DRAW_RINGS, DRAW_TEXT, DEBUG_FEATURE,
-                    AIRPLAY,
                     PARAMSLIDER1, PARAMSLIDER2,
                     LAST_BUTTON };
     
@@ -50,7 +49,6 @@ public:
 	void setDebugOn(bool on) { mDebugButton->setOn(on); };
     void setOrbitsOn(bool on) { mOrbitsButton->setOn(on); };
     void setLabelsOn(bool on) { mLabelsButton->setOn(on); };	
-	void setAirPlayOn(bool on) { mAirPlayButton->setOn(on); };
 	void setShuffleOn(bool on) { mShuffleButton->setOn(on); };
 	void setScreensaverOn(bool on){ mScreensaverButton->setOn(on); };
 	void setRepeatMode(ci::ipod::Player::RepeatMode state)
@@ -108,7 +106,6 @@ private:
     ToggleButton *mOrbitsButton;
     ToggleButton *mLabelsButton;
     ToggleButton *mDebugButton;
-    ToggleButton *mAirPlayButton;
     ToggleButton *mShuffleButton;
     ThreeStateButton *mRepeatButton;
     
