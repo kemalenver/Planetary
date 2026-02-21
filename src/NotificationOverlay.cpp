@@ -56,8 +56,11 @@ void NotificationOverlay::update()
     
     Vec2f interfaceSize = getRoot()->getInterfaceSize();
     
+    bool isIPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
+    float yOffset = isIPhone ? -30 : 170.0f;
+    
     Matrix44f mat;
-    mat.translate(Vec3f( interfaceSize.x * 0.5f, interfaceSize.y * 0.5f + 184.0f - mMessageTexture.getHeight(), 0.0f ));
+    mat.translate(Vec3f( interfaceSize.x * 0.5f, interfaceSize.y * 0.5f + yOffset - mMessageTexture.getHeight(), 0.0f ));
     setTransform(mat);
 }
 

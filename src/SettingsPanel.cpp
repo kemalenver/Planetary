@@ -193,7 +193,9 @@ void SettingsPanel::setInterfaceSize( const Vec2f &interfaceSize )
     mHelpButton->setRect( x1, y1, x2, y2 );
 	
 
-	const float paramSliderWidth = landscape ? 200.0f : 120.0f;
+	const bool  isIPhone         = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
+	const float baseSliderWidth  = landscape ? 200.0f : 120.0f;
+	const float paramSliderWidth = isIPhone ? baseSliderWidth * 0.7f : baseSliderWidth;
 	const float slider1X         = 60.0f;
 	const float slider2X         = slider1X + paramSliderWidth + 75.0f;
 	const float sliderYOff       = 16.0f;

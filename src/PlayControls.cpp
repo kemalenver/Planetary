@@ -181,7 +181,9 @@ void PlayControls::setInterfaceSize( Vec2f interfaceSize )
     const float sliderHeight = 20.0f;
     const float sliderInset  = bSize * 2.0f + timeTexWidth;
     const bool  landscape    = interfaceSize.x > interfaceSize.y;
-    const float sliderWidth  = landscape ? 328.0f : 170.0f;
+    const bool  isIPhone     = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
+    const float baseWidth    = landscape ? 328.0f : 170.0f;
+    const float sliderWidth  = isIPhone ? baseWidth - 80.0f : baseWidth;
 	const float buttonGap	 = landscape ? bSize*2.0f : bSize*1.5f;
     
     // FLY TO CURRENT TRACK-MOON BUTTON
