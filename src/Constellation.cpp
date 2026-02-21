@@ -71,7 +71,7 @@ void Constellation::setup(const vector<NodeArtist*> &filteredNodes)
 
 void Constellation::draw( const float &alpha ) const
 {
-    if( mTotalConstellationVertices > 2 ){
+    if( mConstellationVerts != NULL && mTotalConstellationVertices > 2 ){
         
         gl::color( ColorA( 0.12f, 0.25f, 0.85f, alpha ) );
         

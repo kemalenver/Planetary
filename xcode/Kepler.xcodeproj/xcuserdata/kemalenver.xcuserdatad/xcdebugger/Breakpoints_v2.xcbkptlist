@@ -55,22 +55,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4B8921A2-401C-4CE1-A73D-B6C37AB8B34C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../blocks/BloomScene/src/OrientationNode.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "OrientationNode::getOrientationAngle(orientation)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "BFAA51F7-9FE9-403E-90D6-78D6B54E73DE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -80,7 +64,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
             endingLineNumber = "150"
-            landmarkName = "OrientationNode::getOrientationDescription(orientation)"
+            landmarkName = "OrientationNode::getOrientationAngle(orientation)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -97,22 +81,6 @@
             startingLineNumber = "123"
             endingLineNumber = "123"
             landmarkName = "World::selectHierarchy(artistId, albumId, trackId)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C6DE9A92-D797-4BC9-8F45-7B173EFD524E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../src/Vignette.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "Vignette::updateVerts()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

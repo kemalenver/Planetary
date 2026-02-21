@@ -25,6 +25,7 @@ public:
     Constellation()
     {
         mPrevTotalConstellationVertices = -1;
+        mTotalConstellationVertices = 0;
         mConstellationVerts	= NULL;
     }
     ~Constellation()
