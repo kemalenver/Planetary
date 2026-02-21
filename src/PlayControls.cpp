@@ -227,11 +227,6 @@ void PlayControls::setInterfaceSize( Vec2f interfaceSize )
 	x2 = x1 + bSize;
     mAirPlayButton->setRect( x1, y1, x2, y2 );
 
-    // PLAYLIST BUTTON
-//	x1 -= buttonGap;
-//	x2 = x1 + bSize;
-//    mPlaylistButton->setRect( x1, y1, x2, y2 );	
-	
 	// ALPHA BUTTON
 	x1 -= bSize;
 	x2 = x1 + bSize;
