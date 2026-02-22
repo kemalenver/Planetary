@@ -12,6 +12,7 @@ extern "C" {
 #endif
 
 void initializeOneSignal(const char* appId);
+void requestOneSignalPermission();
 
 #ifdef __cplusplus
 }

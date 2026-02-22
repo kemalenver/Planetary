@@ -1,0 +1,4 @@
+module OneSignalFrameworkWrapper {
+umbrella "/Users/kemalenver/Library/Developer/Xcode/DerivedData/Kepler-fsihpdtqkvsvxzdcidivapouoiwp/SourcePackages/checkouts/OneSignal-XCFramework/OneSignalFrameworkWrapper/include"
+export *
+}

@@ -357,19 +357,70 @@ PlaylistRef getArtist(const uint64_t &artist_id)
 vector<PlaylistRef> getArtists( std::function<void(float)> progress )
 {
     vector<PlaylistRef> artists;
-    
-    MPMediaQuery *query = [MPMediaQuery artistsQuery];
 
-//	MPMediaQuery *query = [[MPMediaQuery alloc] init];
-//	[query addFilterPredicate: [MPMediaPropertyPredicate
-//								predicateWithValue: [NSNumber numberWithInteger: MPMediaTypeMusic]
-//								forProperty: MPMediaItemPropertyMediaType
-//								]];
-//	[query setGroupingType: MPMediaGroupingAlbumArtist];    
-    
+    // Check and request media library authorization
+    MPMediaLibraryAuthorizationStatus status = [MPMediaLibrary authorizationStatus];
+
+    if (status == MPMediaLibraryAuthorizationStatusNotDetermined) {
+        NSLog(@"Media Library: Requesting authorization...");
+
+        // Need to request permission - use dispatch_semaphore to wait for response
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        __block MPMediaLibraryAuthorizationStatus finalStatus = status;
+
+        // Request authorization on main thread (required for iOS permission dialogs)
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MPMediaLibrary requestAuthorization:^(MPMediaLibraryAuthorizationStatus authStatus) {
+                NSLog(@"Media Library Authorization Status: %ld", (long)authStatus);
+                finalStatus = authStatus;
+                dispatch_semaphore_signal(semaphore);
+            }];
+        });
+
+        // Wait for user response (with timeout)
+        dispatch_time_t timeout = dispatch_time(DISPATCH_TIME_NOW, 60 * NSEC_PER_SEC);
+        long result = dispatch_semaphore_wait(semaphore, timeout);
+
+        if (result != 0) {
+            NSLog(@"Media Library Authorization: Timeout waiting for user response");
+            return artists; // Return empty array on timeout
+        }
+
+        status = finalStatus;
+        NSLog(@"Media Library: Authorization complete, status: %ld", (long)status);
+    }
+
+    if (status != MPMediaLibraryAuthorizationStatusAuthorized) {
+        NSLog(@"Media Library Access Denied or Restricted");
+        return artists; // Return empty array if not authorized
+    }
+
+    NSLog(@"Media Library: Authorized, querying artists...");
+
+    MPMediaQuery *query = [MPMediaQuery artistsQuery];
     NSArray *query_groups = [query collections];
-    
     int count = [query_groups count];
+    NSLog(@"Media Library: Found %d artist groups", count);
+
+    // If no artists found on first query, wait and retry once
+    // This handles the case where iOS hasn't made the library accessible yet
+    if (count == 0) {
+        NSLog(@"Media Library: No artists on first query, waiting 2 seconds and retrying...");
+        [NSThread sleepForTimeInterval:2.0];
+
+        query = [MPMediaQuery artistsQuery];
+        query_groups = [query collections];
+        count = [query_groups count];
+        NSLog(@"Media Library: After retry, found %d artist groups", count);
+
+        if (count == 0) {
+            NSLog(@"Media Library: WARNING - Still no artists found!");
+            NSLog(@"Media Library: This could mean:");
+            NSLog(@"  1. Device has no music");
+            NSLog(@"  2. Music library hasn't fully synced");
+            NSLog(@"  3. Library is still initializing");
+        }
+    }
     
     for(MPMediaItemCollection *group in query_groups){
         PlaylistRef artist = PlaylistRef(new Playlist(group));
@@ -384,9 +435,17 @@ vector<PlaylistRef> getArtists( std::function<void(float)> progress )
 
 vector<PlaylistRef> getPlaylists( std::function<void(float)> progress )
 {
-    MPMediaQuery *query = [MPMediaQuery playlistsQuery];
-    
     vector<PlaylistRef> playlists;
+
+    // Check media library authorization (should already be authorized from getArtists)
+    MPMediaLibraryAuthorizationStatus status = [MPMediaLibrary authorizationStatus];
+
+    if (status != MPMediaLibraryAuthorizationStatusAuthorized) {
+        NSLog(@"Media Library Access Not Authorized for playlists");
+        return playlists; // Return empty array if not authorized
+    }
+
+    MPMediaQuery *query = [MPMediaQuery playlistsQuery];
     
     // TODO: perhaps filter by the MPMediaPlaylistPropertyPlaylistAttributes property?
 //        enum {

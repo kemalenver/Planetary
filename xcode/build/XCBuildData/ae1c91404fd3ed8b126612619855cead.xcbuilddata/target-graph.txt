@@ -1,0 +1,6 @@
+Target dependency graph (3 targets)
+Target 'Planetary' in project 'Kepler'
+➜ Explicit dependency on target 'OneSignalFramework' in project 'OneSignalXCFramework'
+Target 'OneSignalFramework' in project 'OneSignalXCFramework'
+➜ Explicit dependency on target 'OneSignalFrameworkWrapper' in project 'OneSignalXCFramework'
+Target 'OneSignalFrameworkWrapper' in project 'OneSignalXCFramework' (no dependencies)

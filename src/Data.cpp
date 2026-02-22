@@ -20,21 +20,28 @@ void Data::setup()
 	mArtists.clear();
 	mPlaylists.clear();
     mNumArtistsPerChar.clear();
-	
+
     if (mState != LoadStateLoading) {
         mState = LoadStateLoading;
         mArtistProgress = 0.0f;
-        mPlaylistProgress = 0.0f;   
-//        TaskQueue::pushTask( std::bind( std::mem_fun( &Data::backgroundInit ), this ) );
-        
-        backgroundInit();
+        mPlaylistProgress = 0.0f;
+
+        // Run backgroundInit on a background thread to avoid blocking main thread
+        // This is critical for iOS permission dialogs to work properly
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            backgroundInit();
+        });
     }
 }
 
 void Data::backgroundInit()
 {
+    NSLog(@"Data::backgroundInit() - Starting music library load...");
 	mPendingArtists = getArtists( std::bind1st( std::mem_fun(&Data::artistProgress), this ) );
+    NSLog(@"Data::backgroundInit() - Loaded %lu artists", (unsigned long)mPendingArtists.size());
+
     mPendingPlaylists = getPlaylists( std::bind1st( std::mem_fun(&Data::playlistProgress), this ) );
+    NSLog(@"Data::backgroundInit() - Loaded %lu playlists", (unsigned long)mPendingPlaylists.size());
 	
 // QUICK FIX FOR GETTING MORE DATA ONTO THE ALPHAWHEEL
     

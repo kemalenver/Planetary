@@ -311,10 +311,7 @@ void KeplerApp::prepareSettings(Settings *settings)
 void KeplerApp::setup()
 {
 //    float t = getElapsedSeconds();
-    
-    // Initialize OneSignal for push notifications
-    initializeOneSignal("0f21d4cf-7dc3-446d-aa45-d4bba9a8280b");
-    
+
     // Lock to landscape right orientation only
     getSignalSupportedOrientations().connect( [] () -> uint32_t {
         return InterfaceOrientation::LandscapeRight;
@@ -657,7 +654,7 @@ void KeplerApp::onTextureLoaderComplete( TextureLoader* loader )
     console() << "setupEnd: " << getElapsedSeconds() << std::endl;
 
     mUiComplete = true;
-    
+
     std::cout << (getElapsedSeconds() - t) << " seconds to onTextureLoaderComplete()" << std::endl;
 }
 
@@ -1606,9 +1603,13 @@ void KeplerApp::update()
         mAlphaChooser.setNumberAlphaPerChar( mData.mNormalizedArtistsPerChar );
 		mLoadingScreen.setVisible( false ); // TODO: remove from scene graph, clean up textures
         mMainBloomNodeRef->setVisible( true );
-        
+
         // Force orientation update now that UI is visible and window size is final
         mOrientationNodeRef->setInterfaceOrientation( mOrientationHelper.getInterfaceOrientation(), false );
+
+        // Initialize OneSignal and request push notification permission now that visualization is visible
+        initializeOneSignal("0f21d4cf-7dc3-446d-aa45-d4bba9a8280b");
+        requestOneSignalPermission();
         
 		mUiLayer.setIsPanelOpen( true );
 
