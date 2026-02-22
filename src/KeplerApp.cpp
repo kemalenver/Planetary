@@ -150,6 +150,7 @@ class KeplerApp : public AppCocoaTouch {
 // DATA/TRUTH BITS:
 	State               mState;
 	Data                mData;
+	size_t              mLastLibraryArtistCount; // Track library size to detect spurious change notifications
 
 // ORIENTATION
     OrientationHelper mOrientationHelper;    
@@ -344,6 +345,7 @@ void KeplerApp::setup()
     mRemainingSetupCalled = false;
     mUiComplete = false;
 	mState.setup();
+	mLastLibraryArtistCount = 0; // Initialize library change detection
     
     // Initialize external display monitoring
     mExternalDisplayConnected = false;
@@ -1613,8 +1615,12 @@ void KeplerApp::update()
 
         // processes pending nodes
 		mWorld.initNodes( mData.mArtists, mFontMedi, mFontMediTiny, mHighResSurfaces, mLowResSurfaces, mNoAlbumArtSurface );
-        
+
         mAlphaChooser.setNumberAlphaPerChar( mData.mNormalizedArtistsPerChar );
+
+		// Store library size to detect spurious library change notifications
+		mLastLibraryArtistCount = mData.mArtists.size();
+
 		mLoadingScreen.setVisible( false ); // TODO: remove from scene graph, clean up textures
         mMainBloomNodeRef->setVisible( true );
 
@@ -2343,14 +2349,26 @@ void KeplerApp::drawScene3DOnly(CameraPersp* customCamera)
 }
 
 bool KeplerApp::onPlayerLibraryChanged( ipod::Player *player )
-{	
+{
+    // iOS sometimes sends spurious MPMediaLibraryDidChangeNotification events
+    // Check if the library actually changed before doing an expensive full reset
+    size_t currentArtistCount = mData.mArtists.size();
+
+    if (currentArtistCount > 0 && currentArtistCount == mLastLibraryArtistCount) {
+        // Library size hasn't changed - likely a spurious notification
+        NSLog(@"Ignoring spurious library change notification (artist count unchanged: %zu)", currentArtistCount);
+        return false;
+    }
+
+    NSLog(@"Library changed detected: %zu -> querying new library", mLastLibraryArtistCount);
+
     // RESET:
 	mLoadingScreen.setVisible( true ); // TODO: reload textures, add back to mBloomSceneRef
-    mMainBloomNodeRef->setVisible( false );    
+    mMainBloomNodeRef->setVisible( false );
     mPlaylistChooser.clearTextures();
     mState.setup();
     mLoadingScreen.setArtistProgress( -1 );
-    mLoadingScreen.setPlaylistProgress( -1 );    
+    mLoadingScreen.setPlaylistProgress( -1 );
     mData.setup();
 	mWorld.setup();
     logEvent("Player Library Changed");

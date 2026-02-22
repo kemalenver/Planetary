@@ -14,6 +14,10 @@ using namespace ci;
 
 void ToggleButton::draw()
 {
+    // Check if texture is valid before attempting to draw
+    // This prevents rendering issues if button was created before texture finished loading
+    if (!mTexture) return;
+
     Area textureArea = mOn ? mOnTextureArea : mOffTextureArea;
     bloom::gl::batchRect( mTexture, textureArea, mRect );
 }
@@ -29,6 +33,9 @@ bool ToggleButton::touchEnded(ci::app::TouchEvent::Touch touch)
 
 void SimpleButton::draw()
 {
+    // Check if texture is valid before attempting to draw
+    if (!mTexture) return;
+
     Area textureArea = mDownCount ? mDownTextureArea : mUpTextureArea;
     bloom::gl::batchRect( mTexture, textureArea, mRect );
 }
@@ -46,7 +53,10 @@ bool SimpleButton::touchEnded(ci::app::TouchEvent::Touch touch)
 
 void TwoStateButton::draw()
 {
-    Area textureArea = mOn ? (mDownCount > 0 ? mOnDownTextureArea : mOnUpTextureArea) : (mDownCount > 0 ? mOffDownTextureArea : mOffUpTextureArea) ;    
+    // Check if texture is valid before attempting to draw
+    if (!mTexture) return;
+
+    Area textureArea = mOn ? (mDownCount > 0 ? mOnDownTextureArea : mOnUpTextureArea) : (mDownCount > 0 ? mOffDownTextureArea : mOffUpTextureArea) ;
     bloom::gl::batchRect( mTexture, textureArea, mRect );
 }
 bool TwoStateButton::touchBegan(ci::app::TouchEvent::Touch touch)
@@ -64,6 +74,9 @@ bool TwoStateButton::touchEnded(ci::app::TouchEvent::Touch touch)
 
 void ThreeStateButton::draw()
 {
+    // Check if texture is valid before attempting to draw
+    if (!mTexture) return;
+
     Area textureArea = mState == 0 ? mFirstTextureArea : mState == 1 ? mSecondTextureArea : mThirdTextureArea;
     bloom::gl::batchRect( mTexture, textureArea, mRect );
 }
