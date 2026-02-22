@@ -165,6 +165,7 @@ class KeplerApp : public AppCocoaTouch {
     double              mCurrentTrackPlayheadTime;
     double              mPlayheadUpdateSeconds;
     ipod::Player::State mCurrentPlayState;
+    double              mLastTrackChangeTime; // Prevent duplicate track change processing
 		
 // CAMERA PERSP
 	CameraPersp		mCam;
@@ -346,6 +347,7 @@ void KeplerApp::setup()
     mUiComplete = false;
 	mState.setup();
 	mLastLibraryArtistCount = 0; // Initialize library change detection
+	mLastTrackChangeTime = 0.0; // Initialize track change debouncing
     
     // Initialize external display monitoring
     mExternalDisplayConnected = false;
@@ -2376,33 +2378,44 @@ bool KeplerApp::onPlayerLibraryChanged( ipod::Player *player )
 }
 
 bool KeplerApp::onPlayerTrackChanged( ipod::Player *player )
-{	   
+{
 //    logEvent("Player Track Changed");
+
+    // Debounce rapid track changes - iOS can send duplicate notifications
+    // Skip if we processed a track change less than 100ms ago
+    double currentTime = getElapsedSeconds();
+    if (currentTime - mLastTrackChangeTime < 0.1) {
+        NSLog(@"Ignoring duplicate track change notification (%.3f seconds since last)", currentTime - mLastTrackChangeTime);
+        return false;
+    }
 
     if (mPlayControls.isPlayheadDragging()) {
         mPlayControls.cancelPlayheadDrag();
         mPlayControls.setPlayheadValue(0.0f);
-        mIpodPlayer.setPlayheadTime( 0.0f );        
+        mIpodPlayer.setPlayheadTime( 0.0f );
     }
-    
+
 	if (mIpodPlayer.hasPlayingTrack()) {
 
         // to be sure...
-        mPlayControls.enablePlayerControls();                    
-        
+        mPlayControls.enablePlayerControls();
+
         // temporarily remember the previous track info
         ipod::TrackRef previousTrack = mPlayingTrack;
-        
+
         // cache the new track
         mPlayingTrack = mIpodPlayer.getPlayingTrack();
 
         // only ask for id once
         uint64_t trackId = mPlayingTrack->getItemId();
-        
+
         if (previousTrack && previousTrack->getItemId() == trackId) {
-            // skip spurious change event
+            // skip spurious change event (same track ID)
             return false;
         }
+
+        // Record this track change to prevent duplicate processing
+        mLastTrackChangeTime = currentTime;
 
         // remember the previous node
         Node* prevSelectedNode = mState.getSelectedNode();
@@ -2527,11 +2540,17 @@ bool KeplerApp::onPlayerStateChanged( ipod::Player *player )
     mPlayControls.setPlayingOn(isPlaying);
     
     // be sure the track moon and elapsed time things get an update:
-    mPlayheadUpdateSeconds = -1;    
+    mPlayheadUpdateSeconds = -1;
 
     // make sure mCurrentTrack and mWorld.mPlayingTrackNode are taken care of,
     // unless we're just continuing to play a track we're already aware of
-    if ((!wasPaused && isPlaying) || firstRun) {
+    // Also check if track was just changed to avoid duplicate processing when both
+    // MPMusicPlayerControllerPlaybackStateDidChangeNotification and
+    // MPMusicPlayerControllerNowPlayingItemDidChangeNotification fire together
+    double timeSinceLastTrackChange = getElapsedSeconds() - mLastTrackChangeTime;
+    bool trackJustChanged = (timeSinceLastTrackChange < 0.2); // Within 200ms
+
+    if (((!wasPaused && isPlaying) || firstRun) && !trackJustChanged) {
         onPlayerTrackChanged( player );
     }
     

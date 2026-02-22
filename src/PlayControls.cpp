@@ -312,10 +312,13 @@ void PlayControls::setPlaylistButtonVisible( bool visible )
     
     if ( mPlaylistButton->isVisible() ) {
         // FIXME: make a bsize a class level constant and use if for the offset here?
-        mAlphaButton->setRect( mPlaylistButton->getRect().getOffset( Vec2f(-50.0f,0.0f) ) );        
+        
+        // NB DISABLING KEMAL
+//        mAlphaButton->setRect( mPlaylistButton->getRect().getOffset( Vec2f(-50.0f,0.0f) ) );
     }
     else {
-        mAlphaButton->setRect( mPlaylistButton->getRect() );        
+        // NB DISABLING KEMAL
+//        mAlphaButton->setRect( mPlaylistButton->getRect() );
     }
     
 }
