@@ -497,8 +497,42 @@ void KeplerApp::initTextures()
 void KeplerApp::onTextureLoaderComplete( TextureLoader* loader )
 {
     float t = getElapsedSeconds();
-    
-    
+
+    // Apply anisotropic filtering to all loaded textures for better quality at oblique angles
+    // Check if anisotropic filtering extension is supported
+    GLfloat maxAnisotropy = 0.0f;
+    glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAnisotropy);
+
+    if (maxAnisotropy > 1.0f) {
+        // Clamp to 8x anisotropic filtering (good balance between quality and performance)
+        GLfloat anisotropyLevel = std::min(8.0f, maxAnisotropy);
+        NSLog(@"Enabling %gx anisotropic filtering (max supported: %g)", anisotropyLevel, maxAnisotropy);
+
+        // Apply anisotropic filtering to planet cloud textures
+        const int cloudTextures[] = {P_CLOUDS_1, P_CLOUDS_2, P_CLOUDS_3, P_CLOUDS_4, P_CLOUDS_5,
+                                      M_CLOUDS_1, M_CLOUDS_2, M_CLOUDS_3, M_CLOUDS_4, M_CLOUDS_5};
+        for (int i = 0; i < 10; i++) {
+            if (mTextures[cloudTextures[i]]) {
+                mTextures[cloudTextures[i]].bind();
+                glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, anisotropyLevel);
+                mTextures[cloudTextures[i]].unbind();
+            }
+        }
+
+        // Apply to key visual textures that benefit most from anisotropic filtering
+        const int keyTextures[] = {SKY_DOME_TEX, GALAXY_DOME_TEX, GALAXY_TEX, DARK_MATTER_TEX,
+                                    ATMOSPHERE_TEX, ATMOSPHERE_DIRECTIONAL_TEX, RINGS_TEX};
+        for (int i = 0; i < 7; i++) {
+            if (mTextures[keyTextures[i]]) {
+                mTextures[keyTextures[i]].bind();
+                glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, anisotropyLevel);
+                mTextures[keyTextures[i]].unbind();
+            }
+        }
+    } else {
+        NSLog(@"Anisotropic filtering not supported on this device");
+    }
+
     // CLOUD TEXTURE VECTOR
 	mCloudTextures.push_back( mTextures[P_CLOUDS_1] );
     mCloudTextures.push_back( mTextures[P_CLOUDS_2] );
