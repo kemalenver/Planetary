@@ -317,10 +317,16 @@ void KeplerApp::setup()
         return InterfaceOrientation::LandscapeRight;
     });
     
-    /// iPad pro set to 120fps
-    ///
-    
-    setFrameRate(120);
+    /// Set frame rate to display's maximum refresh rate
+    /// Supports ProMotion displays (120Hz) and standard displays (60Hz)
+    float maxFrameRate = 60.0f; // Default fallback
+    if (@available(iOS 10.3, *)) {
+        UIScreen *mainScreen = [UIScreen mainScreen];
+        NSInteger maxFPS = mainScreen.maximumFramesPerSecond;
+        maxFrameRate = (float)maxFPS;
+        NSLog(@"Display supports maximum refresh rate: %ld fps", (long)maxFPS);
+    }
+    setFrameRate(maxFrameRate);
     
 //    float longest = max( getWindowSize().x, getWindowSize().y );
 //    bool isIPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
@@ -331,7 +337,9 @@ void KeplerApp::setup()
 //    } else {
 //        console() << "Using default frame rate (device: " << (isIPhone ? "iPhone" : "iPad") << ", longest dimension: " << longest << ")" << endl;
 //    }
-
+    
+    // Enable dithering to reduce gradient banding artifacts in textures
+    glEnable(GL_DITHER);
     
     mRemainingSetupCalled = false;
     mUiComplete = false;
@@ -2558,8 +2566,14 @@ void KeplerApp::onExternalDisplayChanged(bool connected)
         logEvent("External Display Disconnected");
         
         // Restore original frame rate
-        setFrameRate(120);
-        std::cout << "Restored main display frame rate to 120 fps" << std::endl;
+        float maxFrameRate = 60.0f; // Default fallback
+        if (@available(iOS 10.3, *)) {
+            UIScreen *mainScreen = [UIScreen mainScreen];
+            NSInteger maxFPS = mainScreen.maximumFramesPerSecond;
+            maxFrameRate = (float)maxFPS;
+            NSLog(@"Display supports maximum refresh rate: %ld fps", (long)maxFPS);
+        }
+        setFrameRate(maxFrameRate);
     }
 }
 
