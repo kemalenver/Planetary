@@ -414,9 +414,9 @@ void KeplerApp::initTextures()
     //   ...it's Font() that's slow (~50ms per font?)
     DataSourceRef aux   = loadResource( "AauxPro-Black.ttf");
 	mFontHuge			= Font( aux, 100 );
-	mFontSmall			= Font( aux, 16 );
-	mFontMedium			= Font( aux, 18 );
-	mFontBig            = Font( aux, 24 );
+	mFontSmall			= Font( aux, 14 );
+	mFontMedium			= Font( aux, 16 );
+	mFontBig            = Font( aux, 21 );
 
     DataSourceRef medi  = loadResource( "UnitRoundedOT-Medi.otf" );
 	mFontMedi           = Font( medi, 14 );
@@ -431,14 +431,20 @@ void KeplerApp::initTextures()
     
     gl::Texture::Format mipFmt;
     mipFmt.enableMipmapping( true );
-    mipFmt.setMinFilter( GL_LINEAR_MIPMAP_LINEAR );    
-    mipFmt.setMagFilter( GL_LINEAR ); // TODO: experiment with GL_NEAREST where appropriate
-    
+    mipFmt.setMinFilter( GL_LINEAR_MIPMAP_LINEAR );
+    mipFmt.setMagFilter( GL_LINEAR );
+
     gl::Texture::Format repeatMipFmt;
     repeatMipFmt.enableMipmapping( true );
-    repeatMipFmt.setMinFilter( GL_LINEAR_MIPMAP_LINEAR );    
-    repeatMipFmt.setMagFilter( GL_LINEAR ); // TODO: experiment with GL_NEAREST where appropriate
-    repeatMipFmt.setWrap( GL_REPEAT, GL_REPEAT );    
+    repeatMipFmt.setMinFilter( GL_LINEAR_MIPMAP_LINEAR );
+    repeatMipFmt.setMagFilter( GL_LINEAR );
+    repeatMipFmt.setWrap( GL_REPEAT, GL_REPEAT );
+
+    // Sharp format for UI elements that should remain crisp (icons, buttons)
+    gl::Texture::Format sharpFmt;
+    sharpFmt.enableMipmapping( true );
+    sharpFmt.setMinFilter( GL_LINEAR_MIPMAP_NEAREST ); // Sharper mipmap transitions
+    sharpFmt.setMagFilter( GL_NEAREST ); // Crisp magnification
 
     //////////
     
@@ -469,7 +475,7 @@ void KeplerApp::initTextures()
     mTextures.addRequest( DOTTED_TEX,                 "dotted.png",           repeatMipFmt );
     mTextures.addRequest( PLAYHEAD_PROGRESS_TEX,      "playheadProgress.png", repeatMipFmt );
     mTextures.addRequest( RINGS_TEX,                  "rings.png" );
-    mTextures.addRequest( UI_BUTTONS_TEX,			  "uiButtons.png" );
+    mTextures.addRequest( UI_BUTTONS_TEX,			  "uiButtons.png", sharpFmt ); // Use sharp format for crisp UI icons
     mTextures.addRequest( ATMOSPHERE_TEX,             "atmosphere.png",            mipFmt );
     mTextures.addRequest( ATMOSPHERE_DIRECTIONAL_TEX, "atmosphereDirectional.png", mipFmt );
     mTextures.addRequest( ATMOSPHERE_SUN_TEX,         "atmosphereSun.png",         mipFmt );

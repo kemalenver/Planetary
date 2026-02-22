@@ -120,11 +120,29 @@ void AlphaChooser::setNumberAlphaPerChar( float *numberAlphaPerChar )
 }
 
 void AlphaChooser::update( )
-{    
-    Vec2f interfaceSize = getRoot()->getInterfaceSize();    
+{
+    Vec2f interfaceSize = getRoot()->getInterfaceSize();
+
+    // If rects are empty but textures are valid, we need to initialize rects
+    // This handles the case where textures weren't ready during setup()
+    bool needsRectInit = mAlphaRects.empty() && !mAlphaTextures.empty();
+    if (needsRectInit) {
+        // Check if all textures are now valid
+        bool allTexturesValid = true;
+        for (int i = 0; i < mAlphaTextures.size(); i++) {
+            if (!mAlphaTextures[i]) {
+                allTexturesValid = false;
+                break;
+            }
+        }
+        if (allTexturesValid) {
+            setRects();
+        }
+    }
+
     if (mInterfaceSize != interfaceSize) {
         mInterfaceSize = interfaceSize;
-        setRects();        
+        setRects();
     }
 }
 
@@ -159,6 +177,14 @@ void AlphaChooser::draw()
 
 float AlphaChooser::getHeight()
 {
-    return mFullRect.getHeight();
+    // If rects haven't been initialized yet, return a reasonable default height
+    // This prevents layout issues when getHeight() is called before setRects() completes
+    float height = mFullRect.getHeight();
+    if (height <= 0.0f) {
+        // Return approximate height based on typical character size
+        // This matches the vTopPadding (11) + typical char height (~20) + vBottomPadding (9)
+        return 40.0f;
+    }
+    return height;
 }
 
