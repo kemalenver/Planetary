@@ -312,9 +312,9 @@ void KeplerApp::setup()
 {
 //    float t = getElapsedSeconds();
 
-    // Lock to landscape right orientation only
+    // Support both landscape orientations (left and right)
     getSignalSupportedOrientations().connect( [] () -> uint32_t {
-        return InterfaceOrientation::LandscapeRight;
+        return InterfaceOrientation::LandscapeRight | InterfaceOrientation::LandscapeLeft;
     });
     
     /// Set frame rate to display's maximum refresh rate
