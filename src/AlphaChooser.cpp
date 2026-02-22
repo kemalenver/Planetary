@@ -47,9 +47,11 @@ void AlphaChooser::setRects()
     float totalWidth = 0.0f;
     float maxHeight = 0.0f;
 	for( int i=0; i<mAlphaString.length(); i++ ){
+        // Check texture validity before accessing dimensions
+        if( !mAlphaTextures[i] ) return;
         totalWidth += mAlphaTextures[i].getWidth();
         maxHeight = max( maxHeight, (float)mAlphaTextures[i].getHeight() );
-    }    
+    }
     const float hPadding = 20.0f;
     const float vTopPadding = 11.0f;
     const float vBottomPadding = 9.0f;
@@ -127,7 +129,7 @@ void AlphaChooser::update( )
 }
 
 void AlphaChooser::draw()
-{	        
+{
     // we'll use the bright blue components to draw by frequency
     float r = BRIGHT_BLUE.r;
     float g = BRIGHT_BLUE.g;
@@ -135,8 +137,11 @@ void AlphaChooser::draw()
 
     gl::color( ColorA( r, g, b, mOpacity * 0.125f ) );
     gl::drawLine( mFullRect.getUpperLeft(), mFullRect.getUpperRight() );
-            
+
     for( int i=0; i<27; i++ ){
+        // Check if texture is valid before drawing
+        if( !mAlphaTextures[i] ) continue;
+
         float c = mNumberAlphaPerChar[i];
         if ( mAlphaString[i] == mAlphaChar ) {
             gl::color( ColorA( 1.0f, 1.0f, 1.0f, 1.0f * mOpacity ) );
@@ -148,7 +153,7 @@ void AlphaChooser::draw()
         }
         mAlphaTextures[i].enableAndBind();
         gl::drawSolidRect( mAlphaRects[i] );
-        mAlphaTextures[i].disable();            
+        mAlphaTextures[i].disable();
     }
 }
 
