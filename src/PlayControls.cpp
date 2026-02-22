@@ -56,13 +56,13 @@ void PlayControls::createChildren( const Font &font, const Font &fontSmall, cons
                                             Area( uw*2, y1, uw*3, y2 ),  // on texture
                                             Area( uw*2, y0, uw*3, y1 ) );// off texture   
 
-	mAirPlayButton = new ToggleButton( AIRPLAY_CONTROL, 
-                                            false, 
+	mAirPlayButton = new ToggleButton( AIRPLAY_CONTROL,
+                                            false,
                                             uiButtonsTex,
-                                            Area( uw*4, y2, uw*5, y3 ),  // on texture (connected - col 5, row 3)
-                                            Area( uw*3, y2, uw*4, y3 ) );// off texture (disconnected - col 4, row 3)
-
-    mPreviousTrackButton = new SimpleButton( PREV_TRACK, 
+                                            Area( uw*5, y2, uw*6, y3 ),  // on texture (connected - col 6)
+                                            Area( uw*4, y2, uw*5, y3 ) );// off texture (disconnected - col 5)
+    
+    mPreviousTrackButton = new SimpleButton( PREV_TRACK,
                                              uiButtonsTex,
                                              Area( uw*3, y1, uw*4, y2 ),  // on texture
                                              Area( uw*3, y0, uw*4, y1 ) );// off texture
