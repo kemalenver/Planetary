@@ -1,0 +1,7 @@
+dependencies: \
+  /Users/kemalenver/Documents/Work/WIP\ Apps/Planetary\ OG/cinder86/xcode/cinder_Prefix.pch \
+  /Users/kemalenver/Documents/Work/WIP\ Apps/Planetary\ OG/cinder86/src/cinder/Sphere.cpp \
+  ../include/cinder/Sphere.h ../include/cinder/Vector.h \
+  ../include/cinder/CinderMath.h ../include/cinder/Cinder.h \
+  ../boost/boost/version.hpp ../boost/boost/checked_delete.hpp \
+  ../include/cinder/Ray.h
