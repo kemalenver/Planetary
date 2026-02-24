@@ -11,10 +11,13 @@
 #include "cinder/Text.h"
 #include "cinder/gl/gl.h"
 #include "cinder/Color.h"
-#include "cinder/Utilities.h" // for launchWebBrowser()
 #include "Globals.h"          // for color constants
 #include "BloomScene.h"       // for getRoot() functionality (FIXME)
 #include "StringHelpers.h"    // for string/wstring UTF8/UTF32 conversion
+
+#if defined( CINDER_COCOA_TOUCH )
+#import <UIKit/UIKit.h>
+#endif
 
 using namespace ci;
 using namespace ci::app;
@@ -37,23 +40,21 @@ void HelpLayer::setup( const ci::Font &smallFont, const ci::Font &bigFont, const
     layout.addLine( "Planetary " );
     layout.setFont( mBigFont );
     layout.append( "Remastered" );
-    mHeadingTex = layout.render( true, false );    
+    layout.setFont( mSmallFont );
+    layout.setColor( BRIGHT_BLUE );
+    layout.append(" v1.4");
+    mHeadingTex = layout.render( true, false );
     
     layout = TextLayout();	
     layout.setColor( BRIGHT_BLUE );
     layout.setFont( mSmallFont );
-    layout.append( "Original by Bloom Studio. Remastered in 2020 by @kemalenver. " );
-    layout.setColor( BRIGHT_BLUE );
-    layout.append("Get in touch: ");
+    layout.append( "Original by Bloom Studio. Remastered in 2020 by Kemal Enver in Sydney Australia. " );
     layout.setColor( Color::white() );
-    layout.append("Visit the website");
-    layout.setColor( BRIGHT_BLUE );
-    layout.append(" or ");
-    layout.setColor( Color::white() );
-    layout.append("tweet @kemalenver");
+    layout.append("Visit the website: www.planetaryremastered.app");
     layout.setColor( BRIGHT_BLUE );
     layout.append("." );
-    mBodyTex = layout.render( true, false ); 
+    mBodyTex = layout.render( true, false );
+    
     
     ///////////////////////
     
@@ -78,7 +79,7 @@ void HelpLayer::setup( const ci::Font &smallFont, const ci::Font &bigFont, const
     // use TextBox to measure glyphs and generate hit areas...
     
     // make a wide string for counting characters (because © is double-wide)
-    wstring bodyText = L"Original by Bloom Studio. Remastered in 2020 by @kemalenver. Get in touch: Visit the website or tweet @kemalenver.";
+    wstring bodyText = L"Original by Bloom Studio. Remastered in 2020 by Kemal Enver in Sydney Australia. Visit the website: www.planetaryremastered.app.";
     
     // make a normal string to pass to cinder text routines
     string strBodyText = bloom::wstringToUtf8( bodyText );
@@ -92,8 +93,7 @@ void HelpLayer::setup( const ci::Font &smallFont, const ci::Font &bigFont, const
 
     std::vector<std::pair<uint16_t,Vec2f> > glyphPositions = box.measureGlyphs();
     
-    updateRect( &mWebRect, bodyText, L"Visit the website", glyphPositions );
-    updateRect( &mEmailRect, bodyText, L"tweet @kemalenver", glyphPositions );
+    updateRect( &mWebRect, bodyText, L"Visit the website: www.planetaryremastered.app.", glyphPositions );
     
     mWebRect.offset( mBodyPos );
     mEmailRect.offset( mBodyPos );    
@@ -139,15 +139,18 @@ bool HelpLayer::touchEnded( TouchEvent::Touch touch )
     
     // TODO: should we use a callback for these and handle the actions in the main app?
 	
-    Url mailToLink( "https://www.twitter.com/kemalenver" );
-    Url planetaryWebsite( "https://www.kemalenver.com" );
-    
     const Vec2f linkPadding(5,5);
     
     if( mEmailRect.inflated( linkPadding ).contains( pos ) ){
-        launchWebBrowser( mailToLink );
+#if defined( CINDER_COCOA_TOUCH )
+        NSURL *url = [NSURL URLWithString:@"https://www.twitter.com/kemalenver"];
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+#endif
     } else if( mWebRect.inflated( linkPadding ).contains( pos ) ){
-        launchWebBrowser( planetaryWebsite );
+#if defined( CINDER_COCOA_TOUCH )
+        NSURL *url = [NSURL URLWithString:@"https://www.planetaryremastered.app"];
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+#endif
     }
 	
 	return mBgRect.contains( pos );
