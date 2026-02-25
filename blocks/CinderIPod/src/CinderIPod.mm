@@ -18,19 +18,45 @@ Track::~Track()
 
 string Track::getTitle()
 {
-    return string([[m_media_item valueForProperty: MPMediaItemPropertyTitle] UTF8String]);
+    id item = [m_media_item valueForProperty: MPMediaItemPropertyTitle];
+    if(item) {
+        return string([item UTF8String]);
+    } else {
+        return string("");
+    }
 }
 string Track::getAlbumTitle()
 {
-    return string([[m_media_item valueForProperty: MPMediaItemPropertyAlbumTitle] UTF8String]);
+    id item = [m_media_item valueForProperty: MPMediaItemPropertyAlbumTitle];
+    if(item) {
+        return string([item UTF8String]);
+    } else {
+        // Log tracks that are missing album title
+        NSString *title = [m_media_item valueForProperty: MPMediaItemPropertyTitle];
+        NSString *artist = [m_media_item valueForProperty: MPMediaItemPropertyArtist];
+        NSLog(@"Track missing album title - Title: \"%@\", Artist: \"%@\"", 
+              title ? title : @"(no title)", 
+              artist ? artist : @"Unknown");
+        return string("Unknown");
+    }
 }
 string Track::getArtist()
 {
-    return string([[m_media_item valueForProperty: MPMediaItemPropertyArtist] UTF8String]);
+    id item = [m_media_item valueForProperty: MPMediaItemPropertyArtist];
+    if(item) {
+        return string([item UTF8String]);
+    } else {
+        return string("Unknown");
+    }
 }
 string Track::getAlbumArtist()
 {
-	return string([[m_media_item valueForProperty: MPMediaItemPropertyAlbumArtist] UTF8String]);
+    id item = [m_media_item valueForProperty: MPMediaItemPropertyAlbumArtist];
+    if(item) {
+        return string([item UTF8String]);
+    } else {
+        return string("");
+    }
 }
 uint64_t Track::getAlbumId()
 {
@@ -159,13 +185,23 @@ void Playlist::pushTrack(Track *track)
 string Playlist::getGenre()
 {
 	MPMediaItem *item = [getMediaItemCollection() representativeItem];
-	return string([[item valueForProperty: MPMediaItemPropertyGenre] UTF8String]);
+	id genreValue = [item valueForProperty: MPMediaItemPropertyGenre];
+	if(genreValue) {
+		return string([genreValue UTF8String]);
+	} else {
+		return string("");
+	}
 }
 
 string Playlist::getAlbumTitle()
 {
     MPMediaItem *item = [getMediaItemCollection() representativeItem];
-    return string([[item valueForProperty: MPMediaItemPropertyAlbumTitle] UTF8String]);
+    id albumTitle = [item valueForProperty: MPMediaItemPropertyAlbumTitle];
+    if(albumTitle) {
+        return string([albumTitle UTF8String]);
+    } else {
+        return string("");
+    }
 }
 
 string Playlist::getArtistName()
@@ -181,7 +217,12 @@ string Playlist::getArtistName()
 string Playlist::getAlbumArtistName()
 {
 	MPMediaItem *item = [getMediaItemCollection() representativeItem];
-	return string([[item valueForProperty: MPMediaItemPropertyAlbumArtist] UTF8String]);
+	id albumArtist = [item valueForProperty: MPMediaItemPropertyAlbumArtist];
+	if(albumArtist) {
+		return string([albumArtist UTF8String]);
+	} else {
+		return string("");
+	}
 }
     
 string Playlist::getPlaylistName()
